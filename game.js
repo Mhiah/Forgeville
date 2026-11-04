@@ -215,9 +215,15 @@ function later(fn,ms,list=townTimers){const t=setTimeout(()=>{const i=list.index
 function clearTownTimers(){townTimers.forEach(clearTimeout);townTimers.length=0;}
 function clearNpcs(sel='.npc'){$('npcLayer').querySelectorAll(sel).forEach(n=>n.remove());}
 function setPos(npc,x,y){npc.x=x;npc.y=y;const s=npc.el.style;s.left=x+'%';s.top=y+'%';s.zIndex=String(Math.round(y*10));s.setProperty('--depth',(0.85+(y-64)/28*0.3).toFixed(3));}
-function spawnNpc(type,skin,x,y,extra=''){const el=document.createElement('div');el.className=`npc npc-${type} ${extra}`;
- el.innerHTML=`<span class="npc-bubble"></span><span class="npc-figure"><span class="npc-head" style="background:${skin}"></span><span class="npc-body"></span><span class="npc-legs"><i></i><i></i></span><span class="npc-bag"></span></span>`;
+const HAIR_STYLES=['short','long','bun','puffs','curly','short'];
+const HAIR_COLORS=['#2b211c','#3b2a20','#5a3a26','#7a4a2a','#1d1a19','#a8683d'];
+// A stable look per shopper name, so the same NPC always looks the same.
+function npcLook(seedText){const h=hashSeed(String(seedText));return {hair:HAIR_STYLES[h%HAIR_STYLES.length],hairColor:HAIR_COLORS[(h>>>4)%HAIR_COLORS.length],blink:((h>>>8)%40)/10};}
+function spawnNpc(type,skin,x,y,extra='',look=npcLook(Math.random())){const el=document.createElement('div');el.className=`npc npc-${type} hair-${look.hair} ${extra}`;
+ el.style.setProperty('--hair',look.hairColor);el.style.setProperty('--blink',`-${look.blink}s`);
+ el.innerHTML=`<span class="npc-bubble"></span><span class="npc-figure"><span class="npc-hair-back"></span><span class="npc-arms"><i></i><i></i></span><span class="npc-body"></span><span class="npc-legs"><i></i><i></i></span><span class="npc-head" style="background:${skin}"><span class="npc-hair"></span><i class="eye l"></i><i class="eye r"></i><i class="cheek l"></i><i class="cheek r"></i><i class="mouth"></i></span><span class="npc-bag"></span></span>`;
  $('npcLayer').appendChild(el);const npc={el,x,y};setPos(npc,x,y);void el.offsetWidth;return npc;}
+function mood(npc,m,ms=0,list=townTimers){npc.el.classList.remove('happy','sad');if(m)npc.el.classList.add(m);if(ms)later(()=>npc.el.classList.remove(m),ms,list);}
 function walkTo(npc,x,y,list=townTimers,speed=WALK_SPEED){const dist=Math.hypot(x-npc.x,(y-npc.y)*.8);const ms=REDUCE_MOTION?80:Math.max(220,dist/speed*1000);
  npc.el.style.transitionDuration=ms+'ms';npc.el.classList.toggle('face-left',x<npc.x);npc.el.classList.add('walking');setPos(npc,x,y);later(()=>npc.el.classList.remove('walking'),ms,list);return ms;}
 function say(npc,text,kind='',ms=1300,list=townTimers){const b=npc.el.querySelector('.npc-bubble');b.textContent=text;b.className='npc-bubble show '+kind;later(()=>b.classList.remove('show'),ms,list);}
@@ -226,29 +232,29 @@ function giveBag(npc,hex){npc.el.classList.add('has-bag');npc.el.style.setProper
 function exitNpc(npc,x,list=townTimers,speed=WALK_SPEED){const ms=walkTo(npc,x,80+Math.random()*12,list,speed);later(()=>npc.el.remove(),ms+60,list);}
 const SHORT_REASON={price:'Too pricey',trend:'Not my style',quality:'Too basic',unsure:'Hmm… no',soldout:'Sold out!'};
 function walkVisitor(plan){const b=plan.buyer;const fromLeft=Math.random()<.5;
- const npc=spawnNpc(b.type,b.avatar,fromLeft?-6:106,78+Math.random()*14);
+ const npc=spawnNpc(b.type,b.avatar,fromLeft?-6:106,78+Math.random()*14,'',npcLook(b.name+b.type));
  const ms=walkTo(npc,STALL_X.you+(Math.random()*14-7),71+Math.random()*4);
  later(()=>{applyVisit(plan);
-  if(plan.kind==='buy'){say(npc,`✓ ◈ ${plan.price}`,'yes');stallPop('you',`+◈ ${plan.price}`);giveBag(npc,color(plan.asset.color).hex);}
-  else if(plan.kind==='clearance'){say(npc,'✓ Clearance deal','yes');stallPop('you',`+◈ ${plan.price}`,'clear');giveBag(npc,color(plan.pick.color).hex);}
-  else say(npc,SHORT_REASON[plan.code]||'No thanks','no');
+  if(plan.kind==='buy'){mood(npc,'happy');say(npc,`✓ ◈ ${plan.price}`,'yes');stallPop('you',`+◈ ${plan.price}`);giveBag(npc,color(plan.asset.color).hex);}
+  else if(plan.kind==='clearance'){mood(npc,'happy');say(npc,'✓ Clearance deal','yes');stallPop('you',`+◈ ${plan.price}`,'clear');giveBag(npc,color(plan.pick.color).hex);}
+  else{mood(npc,'sad',plan.kind==='rival'?0:1600);say(npc,SHORT_REASON[plan.code]||'No thanks','no');}
   later(()=>{
    if(plan.kind==='rival'){const r=TRENDS[run.round].rivals[plan.rival];const m2=walkTo(npc,STALL_X[plan.rival]+(Math.random()*8-4),71+Math.random()*4);
-    later(()=>{say(npc,`✓ ◈ ${r.price}`,'rival');stallPop(plan.rival,`+◈ ${r.price}`,'rival');giveBag(npc,color(r.color).hex);later(()=>exitNpc(npc,plan.rival===0?-8:108),700);},m2);}
+    later(()=>{mood(npc,'happy');say(npc,`✓ ◈ ${r.price}`,'rival');stallPop(plan.rival,`+◈ ${r.price}`,'rival');giveBag(npc,color(r.color).hex);later(()=>exitNpc(npc,plan.rival===0?-8:108),700);},m2);}
    else exitNpc(npc,fromLeft?108:-8);
   },850);
  },ms);}
 function walkWalkin(w){const r=TRENDS[run.round].rivals[w.rival];const fromLeft=w.rival===0?Math.random()<.75:Math.random()<.25;
- const npc=spawnNpc(w.buyer.type,w.buyer.avatar,fromLeft?-6:106,80+Math.random()*12);
+ const npc=spawnNpc(w.buyer.type,w.buyer.avatar,fromLeft?-6:106,80+Math.random()*12,'',npcLook(w.buyer.name+w.buyer.type+w.rival));
  const ms=walkTo(npc,STALL_X[w.rival]+(Math.random()*12-6),71+Math.random()*4);
- later(()=>{applyVisit(w);say(npc,`✓ ◈ ${r.price}`,'rival');stallPop(w.rival,`+◈ ${r.price}`,'rival');giveBag(npc,color(r.color).hex);later(()=>exitNpc(npc,fromLeft?-8:108),800);},ms);}
+ later(()=>{applyVisit(w);mood(npc,'happy');say(npc,`✓ ◈ ${r.price}`,'rival');stallPop(w.rival,`+◈ ${r.price}`,'rival');giveBag(npc,color(r.color).hex);later(()=>exitNpc(npc,fromLeft?-8:108),800);},ms);}
 function startAmbient(){if(REDUCE_MOTION||ambientOn)return;ambientOn=true;const tick=()=>{if(!ambientOn)return;if($('npcLayer').querySelectorAll('.npc.ambient').length<3)ambientStroll();later(tick,1700+Math.random()*1800,ambientTimers);};later(tick,250,ambientTimers);}
 function stopAmbient(){ambientOn=false;ambientTimers.forEach(clearTimeout);ambientTimers.length=0;clearNpcs('.npc.ambient');}
 function ambientStroll(){const types=['bargain','trend','luxury'];const type=types[Math.floor(Math.random()*3)];const skin=SKINS[Math.floor(Math.random()*SKINS.length)];const fromLeft=Math.random()<.5;
  const npc=spawnNpc(type,skin,fromLeft?-6:106,80+Math.random()*12,'ambient');
  if(Math.random()<.45){exitNpc(npc,fromLeft?108:-8,ambientTimers,14);return;}
  const stop=['0','you','1'][Math.floor(Math.random()*3)];const ms=walkTo(npc,STALL_X[stop]+(Math.random()*10-5),71+Math.random()*4,ambientTimers,14);
- later(()=>{if(Math.random()<.5)say(npc,['Just looking','Nice colours!','Hmm…','Ooh!'][Math.floor(Math.random()*4)],'',1100,ambientTimers);later(()=>exitNpc(npc,fromLeft?108:-8,ambientTimers,14),1300,ambientTimers);},ms,ambientTimers);}
+ later(()=>{if(Math.random()<.5){mood(npc,'happy',1100,ambientTimers);}if(Math.random()<.5)say(npc,['Just looking','Nice colours!','Hmm…','Ooh!'][Math.floor(Math.random()*4)],'',1100,ambientTimers);later(()=>exitNpc(npc,fromLeft?108:-8,ambientTimers,14),1300,ambientTimers);},ms,ambientTimers);}
 function revealTown(){const r=$('marketScene').getBoundingClientRect();if(r.top<0||r.bottom>window.innerHeight)$('marketScene').scrollIntoView({block:'center',behavior:REDUCE_MOTION?'auto':'smooth'});}
 function bindTown(){$('skipSales').onclick=skipSales;document.addEventListener('visibilitychange',()=>{if(document.hidden&&session)skipSales();});}
 resetGame();bind();bindTown();
