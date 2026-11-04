@@ -120,3 +120,36 @@
 .why-reasons div{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.reason-chip{font-size:11px;background:#f4ede3;border-radius:6px;padding:4px 8px;color:#6c5a48}
 .why-rivals{font-size:12px;color:#6f7d70;margin:12px 0 0;line-height:1.5}
 @media(max-width:720px){.market-scene{height:280px}.stall-name{font-size:7px;padding:2px 4px}.why-row{grid-template-columns:1fr}.trend-meter{min-width:100%}}
+
+/* ---------- Live moves & town events ---------- */
+.town-stage{display:flex;flex-direction:column;gap:10px}
+.live-actions{background:var(--paper);border:1px solid var(--border);border-radius:13px;padding:11px;box-shadow:var(--shadow)}
+.live-actions-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.live-actions-head>span{font-size:9px;letter-spacing:1.2px;font-weight:900;color:var(--forest)}
+.live-actions-head small{font-size:11px;color:#7d6a4f;text-align:right;line-height:1.35}
+.move-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.move-button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;background:#fffcf3;border:1.5px solid #e2dcc8;border-radius:10px;padding:8px;font:inherit;color:var(--ink);cursor:pointer;transition:transform .12s,border-color .12s,background .12s}
+.move-button:hover:not(:disabled){border-color:var(--forest2);transform:translateY(-1px)}
+.move-button strong{display:block;font-size:12px}.move-button small{display:block;font-size:10px;color:#7d887e;line-height:1.3;margin-top:2px}
+.move-icon{font-size:18px;line-height:1}
+.move-button.active{background:#e9f4ea;border-color:#48755a;animation:pulseMove 1.2s ease-in-out infinite alternate}
+.move-button.used,.move-button:disabled{opacity:.55;cursor:default}
+.move-button.active:disabled{opacity:1}
+@keyframes pulseMove{from{box-shadow:0 0 0 0 #48755a00}to{box-shadow:0 0 0 3px #48755a33}}
+.event-banner{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:8;background:#fffdf6f2;border:2px solid #ebbd5b;border-radius:12px;padding:10px 14px;text-align:center;box-shadow:0 10px 26px #2d3b2a33;max-width:82%;pointer-events:none}
+.event-banner strong{display:block;font-family:Georgia,serif;font-size:16px;color:var(--ink)}.event-banner span{display:block;font-size:11px;color:#6f7d70;margin-top:3px}
+.event-banner.show{animation:bannerIn 2.8s ease-out forwards}
+@keyframes bannerIn{0%{opacity:0;transform:translate(-50%,-40%) scale(.9)}10%,80%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-56%) scale(.98)}}
+.rain-layer{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;transition:opacity .6s;background:linear-gradient(#5d7a8f22,#5d7a8f22),repeating-linear-gradient(105deg,transparent 0 14px,#ffffff66 14px 15px,transparent 15px 31px);background-size:100% 100%,60px 60px;animation:rainFall .5s linear infinite}
+.market-scene.raining .rain-layer{opacity:1}
+@keyframes rainFall{from{background-position:0 0,0 0}to{background-position:0 0,-16px 60px}}
+.market-scene.heatwave .town-background{filter:saturate(1.25) sepia(.25) brightness(1.05)}
+.stall.on-sale .stall-price{background:#c4523f;color:#fff;border-color:#c4523f}
+.stall.on-sale .stall-price:before{content:"SALE ";font-size:7px;letter-spacing:.5px}
+.stall.hyped .awning{animation:hypeShake .4s ease-in-out infinite alternate}
+.stall.hyped:after{content:"♪ ♫";position:absolute;top:-34px;right:6%;font-size:13px;color:#315d46;animation:npcBob .4s ease-in-out infinite alternate}
+@keyframes hypeShake{from{rotate:-1deg}to{rotate:1deg}}
+.feed-notice{background:#fff6dc;border-color:#f0dca4}.feed-notice .feed-head strong{font-size:12px}
+.moves-panel{border:1px solid #f0dca4;background:#fffaeb;border-radius:12px;padding:14px 16px;margin:0 0 14px}
+.moves-panel h4{font-size:13px;margin:0 0 8px}.moves-panel ul{margin:0;padding-left:18px}.moves-panel li{font-size:12px;color:#6c6450;line-height:1.5;margin-top:4px}.moves-panel b{color:var(--ink)}
+@media(max-width:420px){.move-button{padding:7px 6px}.move-button small{font-size:9px}.live-actions-head{flex-direction:column;gap:3px}.live-actions-head small{text-align:left}}

@@ -16,6 +16,17 @@ Five rounds: read a trend → design a product (type, material, colour, price, q
 - **Rival regulars:** each rival also has its own customers every round, so the **season standings** are a real race.
 - **Ambient town:** strollers browse the stalls between rounds. A *Skip to results* button fast-forwards a round.
 
+### Your moves during a round
+While shoppers arrive you can use each move once per round:
+- **⚡ Flash sale:** 20% off for the next 6 shoppers.
+- **📣 Hype it up:** ◈ 20 to draw 2 extra shoppers and raise interest for the next 6.
+- **📦 Rush restock:** make 4 more items mid-round at 130% of unit cost.
+
+A hint line suggests a move when shoppers keep saying "too pricey", hesitate, or you're about to sell out.
+
+### Town events
+Each round brings one surprise partway through: a sudden downpour (waterproof sells, everything else slows), a rival price cut, a tour bus of well-off visitors, a style influencer filming (trend-fit matters even more), or a heatwave (nobody wants jackets). The results panel reports the event and how each move performed.
+
 ### Design feedback
 - Products are drawn in their chosen colour with a **material texture** (canvas weave, recycled speckle, waterproof gloss and droplets, premium sheen with gold stitching).
 - A live **trend match** meter shows which parts of your design (product, material, colour) fit this week's trend.

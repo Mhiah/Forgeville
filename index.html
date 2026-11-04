@@ -83,6 +83,7 @@
 
       <aside class="town-column">
         <div class="town-title-row"><div><span class="tiny-label">THE TOWN SQUARE</span><h2>Meet your market.</h2></div><div class="town-clock"><span>◷</span> <span id="marketMood">WAITING</span></div></div>
+        <div class="town-stage" id="townStage">
         <div class="market-scene" id="marketScene">
           <svg class="town-background" viewBox="0 0 540 340" preserveAspectRatio="none" aria-hidden="true">
             <rect width="540" height="340" fill="#d4e9df"/>
@@ -103,6 +104,13 @@
           <div class="speech-bubble" id="buyerSpeech" aria-live="polite">A new shop? Let's see what you've got!</div>
           <div class="market-scene-footer"><span class="live-dot"></span><span id="sceneLabel">TOWN IS BROWSING</span></div>
           <button type="button" class="skip-button hidden" id="skipSales">Skip to results ▸▸</button>
+          <div class="rain-layer" aria-hidden="true"></div>
+          <div class="event-banner hidden" id="eventBanner" role="status"></div>
+        </div>
+        <div class="live-actions hidden" id="liveActions">
+          <div class="live-actions-head"><span>YOUR MOVES</span><small id="liveHint">Use each move once per round.</small></div>
+          <div class="move-buttons" id="moveButtons"></div>
+        </div>
         </div>
         <div class="shopper-personas"><div class="persona"><span class="persona-icon bargain">◈</span><div><strong>Bargain hunters</strong><small>Live for a good deal</small></div></div><div class="persona"><span class="persona-icon trend">✳</span><div><strong>Trend chasers</strong><small>Want what's in style</small></div></div><div class="persona"><span class="persona-icon luxury">✧</span><div><strong>Luxury lovers</strong><small>Pay more for quality</small></div></div></div>
         <section class="activity-section"><div class="panel-heading"><h3>Shopper chatter</h3><span id="activityCount" class="subtle">0 VISITS</span></div><div class="activity-feed" id="activityFeed"><div class="feed-placeholder"><span>❀</span><p>Open your stall to see what people think of your designs.</p></div></div></section>
