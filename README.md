@@ -1,59 +1,101 @@
-# Forgeville — playable game prototype
+# Forgeville — The Workshop Game
 
-A self-contained offline browser game. **No real tokens, NFTs, blockchain transactions, or NPC wallets.** The town economy, shopper decisions, design cards and royalties are simulated in JavaScript.
+**Design, price and sell to a town of NPC shoppers who remember you, in a cozy workshop strategy game.**
 
-## Play
+Forgeville is a browser strategy game about running a small workshop in a living town. Each market day the town wants something different. You design a product, set its price, pay for a batch, then open your stall and watch 18+ shoppers decide, one by one, whether you got it right.
 
-Open `index.html` in any modern browser. No dependencies, account or server required. For a single-file version, use `forgeville-playable.html`.
+▶ **Play:** [mhiah.github.io/Forgeville](https://mhiah.github.io/Forgeville/) · or open `forgeville-playable.html` in any browser (single file, works offline)
 
-## Gameplay
+Entry for the **Loadout AI Game Competition** · Stage: **Playable demo** · Solo developer: Mia ([@Mhiah](https://github.com/Mhiah))
 
-Five rounds: read a trend → design a product (type, material, colour, price, quantity) → produce with your coin budget → watch 18 shoppers walk through the town square → review sales and continue.
+![Forgeville on desktop](docs/screenshots/desktop.png)
 
-### The living town
-- **Market stalls:** your stall sits between Wren & Co. and Pip Studio, each showing its product and price.
-- **Walking shoppers:** every buyer visit is an NPC who walks to your stall and buys (leaving with a bag in your product's colour) or says why they passed. Some cross the street and buy from a rival instead.
-- **Rival regulars:** each rival also has its own customers every round, so the **season standings** are a real race.
-- **Ambient town:** strollers browse the stalls between rounds. A *Skip to results* button fast-forwards a round.
+---
 
-### Your moves during a round
-While shoppers arrive you can use each move once per round:
-- **⚡ Flash sale:** 20% off for the next 6 shoppers.
-- **📣 Hype it up:** ◈ 20 to draw 2 extra shoppers and raise interest for the next 6.
-- **📦 Rush restock:** make 4 more items mid-round at 130% of unit cost.
+## The idea
 
-A hint line suggests a move when shoppers keep saying "too pricey", hesitate, or you're about to sell out.
+Most tycoon games turn customers into a number. In Forgeville, every customer is a person.
 
-### Town events
-Each round brings one surprise partway through: a sudden downpour (waterproof sells, everything else slows), a rival price cut, a tour bus of well-off visitors, a style influencer filming (trend-fit matters even more), or a heatwave (nobody wants jackets). The results panel reports the event and how each move performed.
+The town has **24 named townsfolk** in three kinds (bargain hunters, trend chasers and luxury lovers), each with their own budget and taste. They walk up to your stall, buy or tell you why they didn't ("too pricey", "not my style"), and **they remember you**. Shoppers who loved a purchase come back as fans. A regretted buy makes them wary. Rivals across the street compete for the same shoppers, and when you sell a hit, **they copy it**.
 
-### Town memory
-Forgeville has 24 named townsfolk, each with a fixed shopper type, look and budget, and they remember your workshop:
-- Shoppers who **loved** a purchase come back as fans (♥ over their heads) and are keener to buy again.
-- A **regretted** purchase makes them wary; someone who found you too pricey notices if you cut prices.
-- Shoppers who went to a rival mention it next time.
-- The **Town memory** panel lists who knows you (fans, customers, wary, at rivals), and the shopper chatter quotes their memories.
+The core tension: **you can't design for everybody.**
 
-### Copycats
-Sell 60%+ of a batch (at least 4 items) and a rival copies your design next round, marked COPY on their stall. You earn a 7% design royalty on every copy they sell, but making the same thing again means competing with your own copy.
+<p align="center">
+  <img src="docs/screenshots/market-day.png" width="420" alt="Market day: shoppers walk to the stalls in the rain while a flash sale runs and a rival sells a copy of your design">
+  <img src="docs/screenshots/phone.png" width="260" alt="Forgeville on a phone, opening on the town square">
+</p>
 
-### Design feedback
-- Products are drawn in their chosen colour with a **material texture** (canvas weave, recycled speckle, waterproof gloss and droplets, premium sheen with gold stitching).
-- A live **trend match** meter shows which parts of your design (product, material, colour) fit this week's trend.
-- After each round, **Why shoppers decided** breaks down trend match, quality, price reach and competition, lists what passers-by said, and shows how many sales each rival made. Buyer categories have different tastes and wallets. Rival workshops increase saturation; optional design remixing pays 7% royalties. A 3% community fee grows the design challenge treasury. Unsold goods carry over and may sell at a 30% discount. The game tracks available cash, inventory and simulated sales per design.
+## How to play
 
-## Technical notes
+1. **Meet your market.** Learn what each kind of shopper wants and can afford.
+2. **Read the trend.** The Daily Gazette announces what's hot this round: products, materials and colours. A live trend-match meter scores your design.
+3. **Design and produce.** Choose a jacket, tote, sneakers or cap; a material (canvas, recycled, waterproof, premium); a colour; a price; and a batch size. You pay for the whole batch up front.
+4. **Open your stall.** Shoppers walk through the town square and decide. While they arrive you can make **three moves** (once each per round):
+   - ⚡ **Flash sale:** 20% off for the next 6 shoppers.
+   - 📣 **Hype it up:** spend ◈ 20 to draw 2 extra shoppers and raise interest.
+   - 📦 **Rush restock:** make 4 more items mid-round at a premium.
+5. **React to the town.** Each round brings one surprise event: a downpour, a rival's price cut, a tour bus, a style influencer or a heatwave.
+6. **Win the season.** Five market days. Unsold stock carries over at a discount. Beat Wren & Co. and Pip Studio in the season standings.
 
-- Built in plain HTML/CSS/JavaScript; works offline.
-- Prices, demand and decisions are game mechanics; no financial transactions.
-- The design shelf is **NFT-ready concept UI only**. It does not mint anything.
-- The town treasury is a simulated number, not a token.
-- There is no wallet login, Solana integration or token launch.
-- Future ideas: persistent saves, actual user designers, NPC personalities, richer town events, multiplayer competition, Solana program-controlled escrow, optional NFT minting.
+A six-step illustrated **Guide** is in the top-right corner of the game.
 
-## Files
+## What makes it different
 
-`index.html` — layout and SVG town scene
-`style.css` — responsive design
-`game.js` — state, shopper simulation, town animation and game logic
-`forgeville-playable.html` — single-file build; regenerate with `python3 tools/build_single_file.py` after editing the other files
+| Feature | What it does |
+|---|---|
+| **Shoppers with memory** | 24 persistent townsfolk remember past purchases. Fans (♥) return keener to buy; regretted purchases make shoppers wary; price cuts get noticed. |
+| **Copycat rivals** | Sell 60%+ of a batch and a rival copies your design next round, paying you a **7% design royalty** on every copy. Repeat yourself and you compete with your own copy. |
+| **Live market moves** | Flash sales, hype and restocks let you respond while shoppers are deciding, guided by hints based on what they're saying. |
+| **Town events** | One surprise per round changes demand partway through a market day. |
+| **Readable results** | Every round explains *why*: trend match, quality, price reach, competition, what passers-by said, how each move performed and who crossed the street. |
+| **A living town** | Animated shoppers with faces, hairstyles and moods; rival stalls; season standings; town memory panel. |
+
+<p align="center">
+  <img src="docs/screenshots/results.png" width="360" alt="Round results explaining moves, fans and why shoppers decided">
+  <img src="docs/screenshots/guide.png" width="320" alt="The in-game guide">
+</p>
+
+## How AI was used
+
+AI coding assistants were used throughout development, with Mia directing the design, gameplay decisions and testing:
+
+- **Building the game:** the first playable prototype (economy, product designer, three shopper types) and every later system (the animated town, shopper memory, copycat rivals, live moves, town events, the guide) were written with AI coding assistants from Mia's direction and feedback.
+- **The shopper model:** shoppers are "AI-style" agents. Each one scores a product on price against their budget, trend fit, material quality, competition and their memory of your stall, then decides and explains the decision in their own words.
+- **Testing:** AI-driven browser playtests played full five-round seasons on desktop and phone screen sizes after every change, checking the economy, the visitor counts and console errors, and capturing screenshots for review.
+- **Art:** all characters, products and town scenery are drawn in code (SVG and CSS), so there is no generated or stock imagery.
+
+## Development plan
+
+Forgeville is a playable demo. The plan, in order:
+
+1. **Polish the core loop.** Sound and music, saved progress, a guided first round, balancing passes on prices and shopper budgets, accessibility (keyboard play, reduced motion is already supported).
+2. **Deepen the town.** More products and materials, seasons that change across a year, workshop upgrades and staff, more events, and townsfolk with relationships (friends recommend your stall to each other).
+3. **Talking townsfolk.** Optional LLM-written dialogue on top of the deterministic shopper model, so regulars chat about your designs, gossip about rivals and react to town events in their own voice, without changing the fairness of the simulation.
+4. **Competitive seasons.** Asynchronous multiplayer: players' workshops share one town and one set of shoppers, with weekly season leaderboards.
+5. **Creator layer.** Player designs become collectible **design cards**. The copycat royalty already in the game becomes a real remix royalty, optionally onchain on Solana, with design challenges funded by the town treasury.
+6. **Launch.** Mobile-friendly web release first, then wider distribution with Loadout.
+
+## Run it locally
+
+No build step and no dependencies.
+
+```bash
+git clone https://github.com/Mhiah/Forgeville.git
+cd Forgeville
+open index.html          # or double-click forgeville-playable.html
+```
+
+| File | Purpose |
+|---|---|
+| `index.html` | Layout, town scene and panels |
+| `style.css` | Styling, characters and animation |
+| `game.js` | Economy, shopper model, town memory, rivals, events, animation and guide |
+| `forgeville-playable.html` | Single-file build of the three files above |
+| `tools/build_single_file.py` | Rebuilds the single-file version: `python3 tools/build_single_file.py` |
+| `.github/workflows/pages.yml` | Publishes the game to GitHub Pages on every push to `main` |
+
+The economy is simulated in the browser: coins, design cards, royalties and the town treasury are game mechanics. No wallet, token or NFT is involved in this version.
+
+---
+
+© Mia (Mhiah). All rights reserved.
