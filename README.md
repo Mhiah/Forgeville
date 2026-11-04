@@ -27,6 +27,16 @@ A hint line suggests a move when shoppers keep saying "too pricey", hesitate, or
 ### Town events
 Each round brings one surprise partway through: a sudden downpour (waterproof sells, everything else slows), a rival price cut, a tour bus of well-off visitors, a style influencer filming (trend-fit matters even more), or a heatwave (nobody wants jackets). The results panel reports the event and how each move performed.
 
+### Town memory
+Forgeville has 24 named townsfolk, each with a fixed shopper type, look and budget, and they remember your workshop:
+- Shoppers who **loved** a purchase come back as fans (♥ over their heads) and are keener to buy again.
+- A **regretted** purchase makes them wary; someone who found you too pricey notices if you cut prices.
+- Shoppers who went to a rival mention it next time.
+- The **Town memory** panel lists who knows you (fans, customers, wary, at rivals), and the shopper chatter quotes their memories.
+
+### Copycats
+Sell 60%+ of a batch (at least 4 items) and a rival copies your design next round, marked COPY on their stall. You earn a 7% design royalty on every copy they sell, but making the same thing again means competing with your own copy.
+
 ### Design feedback
 - Products are drawn in their chosen colour with a **material texture** (canvas weave, recycled speckle, waterproof gloss and droplets, premium sheen with gold stitching).
 - A live **trend match** meter shows which parts of your design (product, material, colour) fit this week's trend.

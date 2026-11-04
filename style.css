@@ -153,3 +153,19 @@
 .moves-panel{border:1px solid #f0dca4;background:#fffaeb;border-radius:12px;padding:14px 16px;margin:0 0 14px}
 .moves-panel h4{font-size:13px;margin:0 0 8px}.moves-panel ul{margin:0;padding-left:18px}.moves-panel li{font-size:12px;color:#6c6450;line-height:1.5;margin-top:4px}.moves-panel b{color:var(--ink)}
 @media(max-width:420px){.move-button{padding:7px 6px}.move-button small{font-size:9px}.live-actions-head{flex-direction:column;gap:3px}.live-actions-head small{text-align:left}}
+
+/* ---------- Town memory & copycats ---------- */
+.memory-section{border-top:1px solid #e2e5d9;padding-top:21px;margin-top:15px}
+.memory-stats{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}.memory-stats span{font-size:10px;font-weight:800;background:#f1f3ea;color:#5d6b5f;border-radius:6px;padding:4px 7px}
+.memory-stats .fan{background:#fbe6e3;color:#b04a3f}.memory-stats .wary{background:#f4ede3;color:#8a6a4a}.memory-stats .rival{background:#e8eff8;color:#3e5f8e}
+.memory-row{display:flex;gap:9px;align-items:center;margin-top:8px;background:#fffdf8;border:1px solid #ebece2;border-radius:10px;padding:7px 9px}
+.memory-row .feed-avatar{height:28px;width:28px;font-size:10px}
+.memory-row strong{display:block;font-size:11px}.memory-row strong small{font-weight:400;color:#a4aea3}.memory-row span{font-size:10px;color:#7d887e}
+.memory-row.fan{border-color:#f2c9c2;background:#fff7f5}.memory-row.fan span{color:#b04a3f}.memory-row.wary span{color:#8a6a4a}.memory-row.rival span{color:#3e5f8e}
+.feed-info p.memo{color:#6c5a48;font-style:italic;margin-top:4px}
+.npc[data-memo] .npc-figure:after{position:absolute;top:-17px;left:50%;transform:translateX(-50%);font-size:10px;line-height:1;font-weight:900}
+.npc[data-memo=fan] .npc-figure:after{content:"♥";color:#d6584a}
+.npc[data-memo=wary] .npc-figure:after{content:"?";color:#8a6a4a}
+.npc.face-left[data-memo] .npc-figure:after{transform:translateX(-50%) scaleX(-1)}
+.clash.copy{background:#e8eff8;color:#3e5f8e}
+.stall.copycat .stall-body:after{content:"COPY";position:absolute;left:-5px;top:6px;background:#3e5f8e;color:#fff;font-size:7px;font-weight:900;letter-spacing:.6px;padding:2px 4px;border-radius:3px;rotate:-8deg}
