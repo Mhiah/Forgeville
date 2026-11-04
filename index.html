@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f5ed">
+  <meta name="description" content="Forgeville: A playable workshop strategy game where you design products and win over a town of shoppers.">
+  <title>Forgeville — The Workshop Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 30c4 0 6-3 6-6l18 0c0 4 3 6 6 6v4H9z" fill="currentColor"/><path d="M19 24v-8l-5-4h20l-5 4v8M24 35v6" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div><div class="brand-name">FORGEVILLE<span>✦</span></div><div class="brand-tagline">A SMALL TOWN. BIG IDEAS.</div></div>
+      </div>
+      <div class="top-status">
+        <div class="status-unit"><span class="status-label">ROUND</span><strong id="topRound">1 / 5</strong></div>
+        <div class="status-unit balance"><span class="status-label">YOUR COINS</span><strong><span class="coin">◈</span> <span id="topCash">540</span></strong></div>
+        <button class="text-button" id="howToPlay" type="button" aria-label="How to play">? <span class="desktop-inline">How to play</span></button>
+        <button class="text-button restart" id="resetGame" type="button" title="Start a new run">↻ <span class="desktop-inline">Reset</span></button>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <aside class="left-column">
+        <div class="section-kicker"><span class="kicker-dot"></span> THE DAILY GAZETTE <span class="edition">ISSUE <span id="issueNum">01</span></span></div>
+        <article class="trend-card">
+          <div class="weather-scene" id="trendScene" aria-hidden="true"><span id="trendEmoji">☔</span><div class="weather-hills"></div></div>
+          <span class="eyebrow">TODAY'S BIG TREND</span>
+          <h1 id="trendTitle">Rainy-day rush</h1>
+          <p id="trendDescription">The clouds have opened and everyone's after colour that stands out in the rain.</p>
+          <div class="trend-divider"></div>
+          <div class="trend-prefer"><span>SHOPPERS WANT</span><div id="trendTags" class="tags"></div></div>
+          <div class="tip-strip"><span class="tip-icon">✦</span><span id="trendTip">A bold waterproof design should turn heads.</span></div>
+        </article>
+
+        <section class="rivals section-panel">
+          <div class="panel-heading"><h2>Across the street</h2><span class="subtle">RIVAL SHOPS</span></div>
+          <p class="supporting">Take a peek before you choose your own look. Similar products compete for the same shoppers.</p>
+          <div id="rivalList" class="rival-list"></div>
+          <p class="small-note" id="saturationNote">Your market competition will be calculated when you produce.</p>
+        </section>
+
+        <section class="community-panel">
+          <div class="community-header"><span class="leaf-symbol">❀</span><span>TOWN NOTICEBOARD</span></div>
+          <h3>Designs with a story.</h3>
+          <p>Make something people love. A small cut of every sale funds the town's next design challenge.</p>
+          <div class="community-total"><span>Challenge treasury</span><strong><span class="coin">◈</span> <span id="treasuryCoins">0</span></strong></div>
+          <div class="sim-flag">SIMULATED GAME ECONOMY · NO TOKEN</div>
+        </section>
+      </aside>
+
+      <section class="workshop-column">
+        <div class="workshop-topline"><span class="tiny-label">YOUR WORKSHOP</span><span class="round-indicator"><span class="round-light"></span> <span id="workshopStatus">OPEN FOR DESIGN</span></span></div>
+        <div class="workshop-heading"><div><h2>Make your next hit.</h2><p>Good design is a gamble. The town decides.</p></div><span class="stamp">MADE<br>IN<br>FORGEVILLE</span></div>
+
+        <div class="product-stage" id="productStage">
+          <div class="stage-topline"><span class="stage-pill">✦ YOUR LATEST DESIGN</span><span class="stage-count" id="designSerial">FV–001</span></div>
+          <div class="product-illustration" id="productIllustration" aria-label="Product preview"></div>
+          <div class="stage-bottom"><div><span class="preview-label">WORKBENCH PREVIEW</span><strong id="previewProductName">The Everyday Jacket</strong></div><div class="quality-tag" id="qualityTag">● BALANCED</div></div>
+        </div>
+
+        <div id="designControls" class="design-controls">
+          <div class="control-section"><div class="control-title"><strong>01 / Pick a product</strong><span>What will you make?</span></div><div class="template-row" id="templateRow"></div></div>
+          <div class="control-section"><div class="control-title"><strong>02 / Choose materials</strong><span>Quality changes the price of production.</span></div><div class="material-grid" id="materialGrid"></div></div>
+          <div class="control-section"><div class="control-title"><strong>03 / Make it yours</strong><span>Find your signature shade.</span></div><div class="color-row" id="colorRow"></div></div>
+          <div class="control-section optional-remix"><div class="control-title"><strong>04 / Or remix a rival</strong><span>Use their recipe. Pay a 7% sales royalty.</span></div><div id="remixButtons" class="remix-options"></div></div>
+          <div class="control-section pricing-section"><div class="control-title"><strong>05 / Plan your launch</strong><span>You can't spend coins you don't have.</span></div>
+            <div class="price-quantity"><div class="field"><label for="priceRange">Selling price <strong><span class="coin">◈</span> <span id="priceValue">50</span></strong></label><input type="range" id="priceRange" min="15" max="120" value="50" step="5"><div class="range-caps"><span>15</span><span>120</span></div></div>
+              <div class="field quantity-field"><label for="quantityInput">Make a batch of</label><div class="stepper"><button type="button" id="qtyMinus" aria-label="Make one fewer">−</button><input type="number" id="quantityInput" min="1" max="30" value="8" inputmode="numeric"><button type="button" id="qtyPlus" aria-label="Make one more">+</button></div></div>
+            </div>
+            <div class="cost-strip"><div><span>Cost per item</span><strong><span class="coin">◈</span> <span id="unitCost">25</span></strong></div><div><span>Batch cost</span><strong><span class="coin">◈</span> <span id="totalCost">200</span></strong></div><div><span>Possible revenue</span><strong><span class="coin">◈</span> <span id="possibleRevenue">400</span></strong></div></div>
+            <div class="budget-alert" id="budgetAlert" role="status"></div>
+            <button class="main-cta" id="startSales" type="button"><span>Produce & open your stall</span><span class="cta-arrow">↗</span></button>
+          </div>
+        </div>
+        <div id="resultsPanel" class="results-panel hidden" aria-live="polite"></div>
+      </section>
+
+      <aside class="town-column">
+        <div class="town-title-row"><div><span class="tiny-label">THE TOWN SQUARE</span><h2>Meet your market.</h2></div><div class="town-clock"><span>◷</span> <span id="marketMood">WAITING</span></div></div>
+        <div class="market-scene" id="marketScene">
+          <svg class="town-background" viewBox="0 0 540 335" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="540" height="335" fill="#d4e9df"/>
+            <circle cx="438" cy="51" r="37" fill="#f6d88c" opacity=".9"/>
+            <path d="M0 172 Q85 94 180 157 T370 146 T540 172 V335 H0Z" fill="#b1d1b0"/><path d="M0 192Q108 123 245 196T540 181V335H0Z" fill="#8cba95"/>
+            <path d="M0 276L155 235L370 247L540 226V335H0Z" fill="#dfc9a3"/>
+            <g transform="translate(38 62)"><rect x="0" y="72" width="179" height="150" rx="7" fill="#f8e7bf"/><rect x="15" y="82" width="145" height="61" rx="4" fill="#badbcb"/><path d="M-11 72L16 20H156L189 72Z" fill="#c77d59"/><path d="M20 29H151L174 66H2Z" fill="#e3a17a"/><path d="M20 29L5 66M54 29L44 66M88 29V66M122 29L137 66M151 29L173 66" stroke="#c87c59" stroke-width="8"/><rect x="62" y="82" width="69" height="52" rx="5" fill="#436756"/><rect x="70" y="90" width="53" height="35" fill="#d1e6d0"/><path d="M22 145H160V222H22Z" fill="#e8bb88"/><rect x="49" y="158" width="87" height="64" fill="#7f9b76"/><rect x="58" y="164" width="70" height="53" fill="#e9ebd4"/><path d="M5 135H170" stroke="#ad7952" stroke-width="7"/></g>
+            <g transform="translate(302 103)"><rect x="0" y="56" width="161" height="128" rx="5" fill="#f5e2b8"/><path d="M-14 62L35 3H130L173 62Z" fill="#567e69"/><path d="M34 3L20 29H144L130 3" fill="#739d82"/><rect x="29" y="83" width="43" height="54" rx="5" fill="#b2d3b8"/><rect x="96" y="83" width="43" height="54" rx="5" fill="#b2d3b8"/><rect x="55" y="145" width="53" height="39" fill="#c58d63"/><path d="M-6 64H165" stroke="#3f6c59" stroke-width="8"/></g>
+            <path d="M245 290Q295 270 322 312" stroke="#c9b391" stroke-width="14" fill="none" stroke-linecap="round"/><g fill="#5f8d61"><circle cx="480" cy="186" r="24"/><circle cx="504" cy="174" r="20"/><circle cx="471" cy="161" r="20"/><rect x="484" y="184" width="8" height="57" fill="#866749"/></g>
+            <g fill="#f6edd5" opacity=".7"><circle cx="267" cy="236" r="2.5"/><circle cx="300" cy="254" r="3"/><circle cx="237" cy="280" r="2.5"/><circle cx="403" cy="270" r="2.5"/></g>
+          </svg>
+          <div class="town-shop-sign">THE MARKET IS <span id="shopOpenLabel">OPEN</span></div>
+          <div class="shopper-sprite s1" id="sprite1" aria-hidden="true"><span class="sprite-head">•ᴗ•</span><span class="sprite-body"></span></div>
+          <div class="shopper-sprite s2" id="sprite2" aria-hidden="true"><span class="sprite-head">•ᴗ•</span><span class="sprite-body"></span></div>
+          <div class="shopper-sprite s3" id="sprite3" aria-hidden="true"><span class="sprite-head">•ᴗ•</span><span class="sprite-body"></span></div>
+          <div class="speech-bubble" id="buyerSpeech">A new shop? Let's see what you've got!</div>
+          <div class="market-scene-footer"><span class="live-dot"></span><span id="sceneLabel">TOWN IS BROWSING</span></div>
+        </div>
+        <div class="shopper-personas"><div class="persona"><span class="persona-icon bargain">◈</span><div><strong>Bargain hunters</strong><small>Live for a good deal</small></div></div><div class="persona"><span class="persona-icon trend">✳</span><div><strong>Trend chasers</strong><small>Want what's in style</small></div></div><div class="persona"><span class="persona-icon luxury">✧</span><div><strong>Luxury lovers</strong><small>Pay more for quality</small></div></div></div>
+        <section class="activity-section"><div class="panel-heading"><h3>Shopper chatter</h3><span id="activityCount" class="subtle">0 VISITS</span></div><div class="activity-feed" id="activityFeed"><div class="feed-placeholder"><span>❀</span><p>Open your stall to see what people think of your designs.</p></div></div></section>
+        <section class="collection-section"><div class="panel-heading"><h3>Your design shelf</h3><span class="subtle" id="shelfCount">0 DESIGNS</span></div><div id="designShelf"><p class="empty-shelf">Each batch you make becomes a design card with its own sales record.</p></div><div class="sim-flag shelf-disclosure">OFF-CHAIN DESIGN CARDS · NOT MINTED NFTS</div></section>
+      </aside>
+    </main>
+    <footer class="footer"><span>FORGEVILLE © THE WORKSHOP EXPERIMENT</span><span>PLAYABLE PROTOTYPE · SIMULATED MARKET · NO SOLANA OR TOKEN TRANSACTIONS</span></footer>
+  </div>
+  <div id="modalRoot" class="modal-layer hidden" aria-hidden="true"></div>
+  <script src="game.js"></script>
+</body>
+</html>
