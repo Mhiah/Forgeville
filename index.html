@@ -41,6 +41,7 @@
           <p class="supporting">Take a peek before you choose your own look. Similar products compete for the same shoppers.</p>
           <div id="rivalList" class="rival-list"></div>
           <p class="small-note" id="saturationNote">Your market competition will be calculated when you produce.</p>
+          <div class="standings" id="standings"></div>
         </section>
 
         <section class="community-panel">
@@ -61,6 +62,7 @@
           <div class="product-illustration" id="productIllustration" aria-label="Product preview"></div>
           <div class="stage-bottom"><div><span class="preview-label">WORKBENCH PREVIEW</span><strong id="previewProductName">The Everyday Jacket</strong></div><div class="quality-tag" id="qualityTag">● BALANCED</div></div>
         </div>
+        <div class="trend-check" id="trendCheck"></div>
 
         <div id="designControls" class="design-controls">
           <div class="control-section"><div class="control-title"><strong>01 / Pick a product</strong><span>What will you make?</span></div><div class="template-row" id="templateRow"></div></div>
@@ -82,22 +84,25 @@
       <aside class="town-column">
         <div class="town-title-row"><div><span class="tiny-label">THE TOWN SQUARE</span><h2>Meet your market.</h2></div><div class="town-clock"><span>◷</span> <span id="marketMood">WAITING</span></div></div>
         <div class="market-scene" id="marketScene">
-          <svg class="town-background" viewBox="0 0 540 335" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <rect width="540" height="335" fill="#d4e9df"/>
-            <circle cx="438" cy="51" r="37" fill="#f6d88c" opacity=".9"/>
-            <path d="M0 172 Q85 94 180 157 T370 146 T540 172 V335 H0Z" fill="#b1d1b0"/><path d="M0 192Q108 123 245 196T540 181V335H0Z" fill="#8cba95"/>
-            <path d="M0 276L155 235L370 247L540 226V335H0Z" fill="#dfc9a3"/>
-            <g transform="translate(38 62)"><rect x="0" y="72" width="179" height="150" rx="7" fill="#f8e7bf"/><rect x="15" y="82" width="145" height="61" rx="4" fill="#badbcb"/><path d="M-11 72L16 20H156L189 72Z" fill="#c77d59"/><path d="M20 29H151L174 66H2Z" fill="#e3a17a"/><path d="M20 29L5 66M54 29L44 66M88 29V66M122 29L137 66M151 29L173 66" stroke="#c87c59" stroke-width="8"/><rect x="62" y="82" width="69" height="52" rx="5" fill="#436756"/><rect x="70" y="90" width="53" height="35" fill="#d1e6d0"/><path d="M22 145H160V222H22Z" fill="#e8bb88"/><rect x="49" y="158" width="87" height="64" fill="#7f9b76"/><rect x="58" y="164" width="70" height="53" fill="#e9ebd4"/><path d="M5 135H170" stroke="#ad7952" stroke-width="7"/></g>
-            <g transform="translate(302 103)"><rect x="0" y="56" width="161" height="128" rx="5" fill="#f5e2b8"/><path d="M-14 62L35 3H130L173 62Z" fill="#567e69"/><path d="M34 3L20 29H144L130 3" fill="#739d82"/><rect x="29" y="83" width="43" height="54" rx="5" fill="#b2d3b8"/><rect x="96" y="83" width="43" height="54" rx="5" fill="#b2d3b8"/><rect x="55" y="145" width="53" height="39" fill="#c58d63"/><path d="M-6 64H165" stroke="#3f6c59" stroke-width="8"/></g>
-            <path d="M245 290Q295 270 322 312" stroke="#c9b391" stroke-width="14" fill="none" stroke-linecap="round"/><g fill="#5f8d61"><circle cx="480" cy="186" r="24"/><circle cx="504" cy="174" r="20"/><circle cx="471" cy="161" r="20"/><rect x="484" y="184" width="8" height="57" fill="#866749"/></g>
-            <g fill="#f6edd5" opacity=".7"><circle cx="267" cy="236" r="2.5"/><circle cx="300" cy="254" r="3"/><circle cx="237" cy="280" r="2.5"/><circle cx="403" cy="270" r="2.5"/></g>
+          <svg class="town-background" viewBox="0 0 540 340" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="540" height="340" fill="#d4e9df"/>
+            <circle cx="470" cy="34" r="22" fill="#f6d88c" opacity=".9"/>
+            <path d="M0 120Q85 62 180 110T370 100T540 118V340H0Z" fill="#b8d6b5"/><path d="M0 142Q108 92 245 146T540 134V340H0Z" fill="#9cc4a1"/>
+            <g fill="#5f8d61"><circle cx="16" cy="128" r="16"/><circle cx="34" cy="120" r="13"/><circle cx="520" cy="124" r="16"/><circle cx="504" cy="132" r="12"/></g>
+            <rect y="208" width="540" height="132" fill="#e4d2ae"/>
+            <rect y="208" width="540" height="6" fill="#cdb78f"/>
+            <g fill="#d6c29b"><rect x="20" y="236" width="38" height="10" rx="4"/><rect x="96" y="262" width="44" height="10" rx="4"/><rect x="190" y="242" width="40" height="10" rx="4"/><rect x="286" y="276" width="46" height="10" rx="4"/><rect x="372" y="246" width="40" height="10" rx="4"/><rect x="458" y="268" width="44" height="10" rx="4"/><rect x="58" y="300" width="40" height="10" rx="4"/><rect x="236" y="310" width="44" height="10" rx="4"/><rect x="410" y="306" width="40" height="10" rx="4"/></g>
           </svg>
-          <div class="town-shop-sign">THE MARKET IS <span id="shopOpenLabel">OPEN</span></div>
-          <div class="shopper-sprite s1" id="sprite1" aria-hidden="true"><span class="sprite-head">•ᴗ•</span><span class="sprite-body"></span></div>
-          <div class="shopper-sprite s2" id="sprite2" aria-hidden="true"><span class="sprite-head">•ᴗ•</span><span class="sprite-body"></span></div>
-          <div class="shopper-sprite s3" id="sprite3" aria-hidden="true"><span class="sprite-head">•ᴗ•</span><span class="sprite-body"></span></div>
-          <div class="speech-bubble" id="buyerSpeech">A new shop? Let's see what you've got!</div>
+          <div class="stall-row" id="stallRow" aria-hidden="true">
+            <div class="stall stall-rival0" id="stall-0"><div class="awning"></div><div class="stall-body"><div class="stall-goods" id="stallGoods-0"></div><span class="stall-price" id="stallPrice-0">◈ 0</span></div><div class="stall-name">WREN &amp; CO.</div></div>
+            <div class="stall stall-you" id="stall-you"><div class="awning"></div><div class="stall-body"><div class="stall-goods" id="stallGoods-you"></div><span class="stall-price" id="stallPrice-you">◈ 0</span></div><div class="stall-name">YOUR STALL · <span id="stallStock">0</span> LEFT</div></div>
+            <div class="stall stall-rival1" id="stall-1"><div class="awning"></div><div class="stall-body"><div class="stall-goods" id="stallGoods-1"></div><span class="stall-price" id="stallPrice-1">◈ 0</span></div><div class="stall-name">PIP STUDIO</div></div>
+          </div>
+          <div class="npc-layer" id="npcLayer" aria-hidden="true"></div>
+          <div class="town-shop-sign">MARKET <span id="shopOpenLabel">OPEN</span></div>
+          <div class="speech-bubble" id="buyerSpeech" aria-live="polite">A new shop? Let's see what you've got!</div>
           <div class="market-scene-footer"><span class="live-dot"></span><span id="sceneLabel">TOWN IS BROWSING</span></div>
+          <button type="button" class="skip-button hidden" id="skipSales">Skip to results ▸▸</button>
         </div>
         <div class="shopper-personas"><div class="persona"><span class="persona-icon bargain">◈</span><div><strong>Bargain hunters</strong><small>Live for a good deal</small></div></div><div class="persona"><span class="persona-icon trend">✳</span><div><strong>Trend chasers</strong><small>Want what's in style</small></div></div><div class="persona"><span class="persona-icon luxury">✧</span><div><strong>Luxury lovers</strong><small>Pay more for quality</small></div></div></div>
         <section class="activity-section"><div class="panel-heading"><h3>Shopper chatter</h3><span id="activityCount" class="subtle">0 VISITS</span></div><div class="activity-feed" id="activityFeed"><div class="feed-placeholder"><span>❀</span><p>Open your stall to see what people think of your designs.</p></div></div></section>
