@@ -4,7 +4,7 @@
 
 Forgeville is a browser strategy game about running a small workshop in a living town. Each market day the town wants something different. You design a product, set its price, pay for a batch, then open your stall and watch 18+ shoppers decide, one by one, whether you got it right.
 
-▶ **Play:** [mhiah.github.io/Forgeville](https://mhiah.github.io/Forgeville/) · or open `forgeville-playable.html` in any browser (single file, works offline)
+▶ **Play:** [forgeville.myacxt.site](https://forgeville.myacxt.site) · or open `forgeville-playable.html` in any browser (single file, works offline)
 
 Entry for the **Loadout AI Game Competition** · Stage: **Playable demo** · Solo developer: Mia ([@Mhiah](https://github.com/Mhiah))
 
@@ -117,7 +117,7 @@ open index.html          # or double-click forgeville-playable.html
 | `game.js` | Economy, shopper model, town memory, rivals, events, animation and guide |
 | `forgeville-playable.html` | Single-file build of the three files above |
 | `tools/build_single_file.py` | Rebuilds the single-file version: `python3 tools/build_single_file.py` |
-| `.github/workflows/pages.yml` | Publishes the game to GitHub Pages on every push to `main` |
+| `vercel.json`, `netlify.toml` | Hosting config: a static site with no build step, deployed from `main` |
 
 The economy is simulated in the browser: coins, design cards, royalties and the town treasury are game mechanics. No wallet, token or NFT is involved in this version.
 
