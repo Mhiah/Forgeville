@@ -72,8 +72,27 @@ Forgeville is a playable demo. The plan, in order:
 2. **Deepen the town.** More products and materials, seasons that change across a year, workshop upgrades and staff, more events, and townsfolk with relationships (friends recommend your stall to each other).
 3. **Talking townsfolk.** Optional LLM-written dialogue on top of the deterministic shopper model, so regulars chat about your designs, gossip about rivals and react to town events in their own voice, without changing the fairness of the simulation.
 4. **Competitive seasons.** Asynchronous multiplayer: players' workshops share one town and one set of shoppers, with weekly season leaderboards.
-5. **Creator layer.** Player designs become collectible **design cards**. The copycat royalty already in the game becomes a real remix royalty, optionally onchain on Solana, with design challenges funded by the town treasury.
-6. **Launch.** Mobile-friendly web release first, then wider distribution with Loadout.
+5. **Creator layer.** Player designs become collectible **design cards** (NFTs) that players own. When another player remixes a design, its creator earns the remix royalty, turning the copycat mechanic already in the game into a real creator economy.
+6. **Token launch.** Introduce the Forgeville token on top of the shared economy (see *Token design* below).
+7. **Launch.** Mobile-friendly web release first, then wider distribution with Loadout.
+
+### Token design
+
+The token is built on hooks that already exist in the game as simulated mechanics:
+
+| In the game today (simulated) | With the token |
+|---|---|
+| 3% of every sale funds the **town treasury** | An onchain treasury that pays season prizes and funds design challenges |
+| Rivals pay a **7% royalty** when they copy your hit | Creators earn royalties when other players remix their design cards |
+| **Hype** costs coins to draw shoppers | Token spent on hype and promotion is burned or returned to the treasury (a sink) |
+| **Season standings** against two rival shops | Token-entry competitive seasons with prize pools and leaderboards |
+| The Gazette sets each round's **trend** | Holders vote on next season's trends, town events and design challenges, so the community runs the town |
+
+Design principles:
+
+- **Fair play first.** Coins stay a free in-round currency, so winning a market day depends on reading the town, not on spending. The token lives at the meta layer: entry, ownership, cosmetics, upgrades and governance.
+- **Real utility over speculation.** Every token use is tied to something players already do in the game.
+- **Sinks balance sources.** Hype, stall skins, workshop upgrades and named townsfolk are sinks; prizes and royalties are sources.
 
 ## Run it locally
 
