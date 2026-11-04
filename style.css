@@ -169,3 +169,5 @@
 .npc.face-left[data-memo] .npc-figure:after{transform:translateX(-50%) scaleX(-1)}
 .clash.copy{background:#e8eff8;color:#3e5f8e}
 .stall.copycat .stall-body:after{content:"COPY";position:absolute;left:-5px;top:6px;background:#3e5f8e;color:#fff;font-size:7px;font-weight:900;letter-spacing:.6px;padding:2px 4px;border-radius:3px;rotate:-8deg}
+
+.text-button.armed{background:#c4523f;color:#fff;border-radius:6px}
