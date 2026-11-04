@@ -210,3 +210,32 @@
 .guide-standings{width:100%;display:flex;flex-direction:column;gap:6px}.guide-standings div{display:flex;align-items:center;gap:9px;background:#fff;border-radius:9px;padding:8px 10px;font-size:12px}.guide-standings div b{margin-left:auto}.guide-standings span{width:18px;height:18px;border-radius:50%;background:#efeadb;display:grid;place-items:center;font-size:10px;font-weight:900}.guide-standings .you span{background:var(--forest);color:#fff}
 .guide-fineprint{font-size:10px!important;color:#98a196!important;margin:8px 0 0!important;line-height:1.4!important}
 @media(max-width:420px){.guide-card{padding:20px}.guide-card h2{font-size:24px}.guide-products{grid-template-columns:repeat(2,1fr)}.guide-nav .outline-button{padding:10px}}
+
+/* ---------- Upgrades, goals, verdict, thoughts, token ---------- */
+.upgrade-panel{background:var(--paper);border:1px solid var(--border);border-radius:14px;padding:14px;margin-top:12px}
+.upgrade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:10px}
+.upgrade-card{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;background:#fffcf3;border:1.5px solid #e2dcc8;border-radius:11px;padding:10px;font:inherit;color:var(--ink);cursor:pointer;transition:transform .12s,border-color .12s}
+.upgrade-card:hover:not(:disabled){border-color:var(--forest2);transform:translateY(-1px)}
+.upgrade-card:disabled{cursor:default;opacity:.55}.upgrade-card.owned{opacity:1;background:#e9f4ea;border-color:#9fc3a7}
+.upgrade-icon{font-size:20px}.upgrade-card strong{font-size:12px}.upgrade-card small{font-size:10px;color:#7d887e;line-height:1.35;flex:1}.upgrade-card b{font-size:11px;color:var(--forest);margin-top:4px}
+.forecast{margin-top:12px;background:#eef3fa;border:1px dashed #a9bfdc;border-radius:10px;padding:10px 12px}
+.forecast span{display:block;font-size:9px;letter-spacing:1px;font-weight:900;color:#3e5f8e}.forecast strong{display:block;font-size:14px;margin-top:4px}.forecast small{font-size:11px;color:#6c7a8e}
+.season-goals{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+.goal-row{display:grid;grid-template-columns:16px 1fr auto;gap:7px;align-items:center;margin-top:7px;font-size:11px}
+.goal-row>span{color:#c9b98f;font-size:13px}.goal-row.ok>span{color:#d4a640}.goal-row small{color:#87928a;font-size:10px;white-space:nowrap}.goal-row.ok strong{color:var(--forest)}
+.verdict{text-align:center;background:linear-gradient(#fff9e8,#fffdf6);border:2px solid #ebbd5b;border-radius:16px;padding:20px 16px;margin:6px 0 14px}
+.verdict-icon{font-size:40px;display:block}.verdict-stars{font-size:26px;letter-spacing:4px;color:#d4a640;margin-top:4px}
+.verdict h4{font-family:Georgia,serif;font-size:24px;margin:6px 0 12px}
+.verdict-goals{display:flex;flex-direction:column;gap:5px;max-width:340px;margin:auto;text-align:left}.verdict-goals div{font-size:12px;color:#8a8270}.verdict-goals div.ok{color:var(--forest);font-weight:700}.verdict-goals small{float:right;font-weight:400;color:#8a968a}
+.npc-bubble.think{color:#5d5a4f;background:#fff;font-weight:600;font-style:italic;border:1.5px dashed #cfc6ae}
+.clash.undercut{background:#fbe2dc;color:#a2463a;margin-right:4px}
+.token-panel{background:#fffdf6;border:1px solid #d9e4cf;border-radius:11px;padding:11px;margin-top:12px}
+.token-panel.burning{animation:burnGlow 1.2s ease-out}
+@keyframes burnGlow{0%{box-shadow:0 0 0 0 #e5885488;background:#fff1e3}100%{box-shadow:0 0 0 10px #e5885400;background:#fffdf6}}
+.token-head{display:flex;align-items:baseline;gap:8px}.token-head span{font-size:9px;letter-spacing:1px;font-weight:900;color:#6b7f6c}.token-head strong{font-size:14px;margin-left:auto}
+.token-head em{font-style:normal;font-size:11px;font-weight:800}.token-head em.up{color:#3d8a5f}.token-head em.down{color:#a45a51}
+.token-spark{width:100%;height:34px;display:block;margin:6px 0}
+.token-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}.token-stats div{background:#f4f7ee;border-radius:8px;padding:7px 8px}
+.token-stats span{display:block;font-size:10px;color:#6f7d70}.token-stats b{display:block;font-size:14px;margin-top:2px}.token-stats small{font-size:9px;color:#98a196}
+.token-note{font-size:11px!important;line-height:1.5!important;margin:8px 0 0!important}
+.npc.speaking{z-index:900!important}

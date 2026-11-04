@@ -35,7 +35,8 @@ The core tension: **you can't design for everybody.**
    - 📣 **Hype it up:** spend ◈ 20 to draw 2 extra shoppers and raise interest.
    - 📦 **Rush restock:** make 4 more items mid-round at a premium.
 5. **React to the town.** Each round brings one surprise event: a downpour, a rival's price cut, a tour bus, a style influencer or a heatwave.
-6. **Win the season.** Five market days. Unsold stock carries over at a discount. Beat Wren & Co. and Pip Studio in the season standings.
+6. **Upgrade your workshop.** Between rounds, spend profit on a master loom, a bigger stall, a painted sign, a trend scout or a storage room.
+7. **Win the season.** Five market days, up to **3 stars**: top the season standings, reach ◈ 2,000 workshop value and win 12 loyal fans. Rivals you out-sell fight back with lower prices and more regulars.
 
 A six-step illustrated **Guide** is in the top-right corner of the game.
 
@@ -43,11 +44,15 @@ A six-step illustrated **Guide** is in the top-right corner of the game.
 
 | Feature | What it does |
 |---|---|
+| **Shoppers who think out loud** | Before deciding, each shopper weighs your offer in a thought bubble: *“◈60? My budget’s ◈45…”*, *“Loved my last one here…”*, *“Wren has one for ◈55…”* |
 | **Shoppers with memory** | 24 persistent townsfolk remember past purchases. Fans (♥) return keener to buy; regretted purchases make shoppers wary; price cuts get noticed. |
 | **Copycat rivals** | Sell 60%+ of a batch and a rival copies your design next round, paying you a **7% design royalty** on every copy. Repeat yourself and you compete with your own copy. |
+| **Rivals that fight back** | Out-sell a rival and next round they undercut your prices and pull in extra regulars. |
+| **Workshop upgrades** | Five one-time upgrades turn profit into long-term strategy. |
 | **Live market moves** | Flash sales, hype and restocks let you respond while shoppers are deciding, guided by hints based on what they're saying. |
 | **Town events** | One surprise per round changes demand partway through a market day. |
 | **Readable results** | Every round explains *why*: trend match, quality, price reach, competition, what passers-by said, how each move performed and who crossed the street. |
+| **$FORGE buyback & burn (preview)** | 3% of every sale funds the town treasury. After each market day it buys back simulated $FORGE and burns it; hype burns $FORGE too. A live price chart shows the effect. |
 | **A living town** | Animated shoppers with faces, hairstyles and moods; rival stalls; season standings; town memory panel. |
 
 <p align="center">
@@ -78,13 +83,14 @@ Forgeville is a playable demo. The plan, in order:
 
 ### Token design
 
-The token is built on hooks that already exist in the game as simulated mechanics:
+The token is built on hooks that already exist in the game. **Buyback & burn is already playable as a simulated preview:** the treasury buys $FORGE from a market pool after every market day and burns it, and hype spending burns $FORGE directly.
 
 | In the game today (simulated) | With the token |
 |---|---|
 | 3% of every sale funds the **town treasury** | An onchain treasury that pays season prizes and funds design challenges |
 | Rivals pay a **7% royalty** when they copy your hit | Creators earn royalties when other players remix their design cards |
-| **Hype** costs coins to draw shoppers | Token spent on hype and promotion is burned or returned to the treasury (a sink) |
+| **Hype** costs coins to draw shoppers: half is burned, half goes to the treasury | Token spent on hype and promotion is burned (a sink) |
+| Treasury **buys back and burns** $FORGE after every market day | Onchain buyback & burn funded by real game fees |
 | **Season standings** against two rival shops | Token-entry competitive seasons with prize pools and leaderboards |
 | The Gazette sets each round's **trend** | Holders vote on next season's trends, town events and design challenges, so the community runs the town |
 

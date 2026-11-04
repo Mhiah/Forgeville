@@ -34,6 +34,7 @@
           <div class="trend-divider"></div>
           <div class="trend-prefer"><span>SHOPPERS WANT</span><div id="trendTags" class="tags"></div></div>
           <div class="tip-strip"><span class="tip-icon">✦</span><span id="trendTip">A bold waterproof design should turn heads.</span></div>
+          <div class="forecast hidden" id="forecast"></div>
         </article>
 
         <section class="rivals section-panel">
@@ -42,14 +43,17 @@
           <div id="rivalList" class="rival-list"></div>
           <p class="small-note" id="saturationNote">Your market competition will be calculated when you produce.</p>
           <div class="standings" id="standings"></div>
+          <div class="season-goals" id="seasonGoals"></div>
         </section>
 
         <section class="community-panel">
           <div class="community-header"><span class="leaf-symbol">❀</span><span>TOWN NOTICEBOARD</span></div>
-          <h3>Designs with a story.</h3>
-          <p>Make something people love. A small cut of every sale funds the town's next design challenge.</p>
-          <div class="community-total"><span>Challenge treasury</span><strong><span class="coin">◈</span> <span id="treasuryCoins">0</span></strong></div>
-          <div class="sim-flag">SIMULATED GAME ECONOMY · NO TOKEN</div>
+          <h3>Every sale fuels the town.</h3>
+          <p>3% of every sale goes to the town treasury, which buys back and burns $FORGE.</p>
+          <div class="community-total"><span>Town treasury</span><strong><span class="coin">◈</span> <span id="treasuryCoins">0</span></strong></div>
+          <div class="token-panel" id="tokenPanel"></div>
+          <p class="token-note">After every market day the treasury spends half its balance buying back $FORGE and burning it. Hype burns $FORGE too.</p>
+          <div class="sim-flag">SIMULATED $FORGE PREVIEW · NOT A REAL TOKEN</div>
         </section>
       </aside>
 
@@ -63,6 +67,8 @@
           <div class="stage-bottom"><div><span class="preview-label">WORKBENCH PREVIEW</span><strong id="previewProductName">The Everyday Jacket</strong></div><div class="quality-tag" id="qualityTag">● BALANCED</div></div>
         </div>
         <div class="trend-check" id="trendCheck"></div>
+
+        <section class="upgrade-panel" id="upgradePanel"><div class="control-title"><strong>Upgrade your workshop</strong><span>Spend profit now to earn more later. One of each.</span></div><div class="upgrade-grid" id="upgradeGrid"></div></section>
 
         <div id="designControls" class="design-controls">
           <div class="control-section"><div class="control-title"><strong>01 / Pick a product</strong><span>What will you make?</span></div><div class="template-row" id="templateRow"></div></div>
