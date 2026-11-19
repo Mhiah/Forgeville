@@ -12,6 +12,8 @@ Entry for the **Manycore Aholo Global 3D AI Hackathon** ("Play in 3D, Create wit
 
 ---
 
+> **Built using Aholo Lux3D, and it runs live.** Every product in the game is a 3D model generated with Aholo Lux3D, and the game runs at [forgeville.myacxt.site](https://forgeville.myacxt.site). Full submission details are in [SUBMISSION.md](SUBMISSION.md), with the [project report (PDF)](docs/Forgeville-3D-Project-Report.pdf) and the [demo video](docs/Forgeville-3D-Demo.mp4) in `docs/`.
+
 ## For judges: how to check this entry
 
 **Play it:** [forgeville.myacxt.site](https://forgeville.myacxt.site). It works in Chrome, Edge, Safari or Firefox on desktop or phone, with nothing to install. The first load downloads about 11 MB of 3D models, so give it a few seconds.
@@ -33,7 +35,7 @@ Entry for the **Manycore Aholo Global 3D AI Hackathon** ("Play in 3D, Create wit
 | Workbench viewer, recolouring and material finishes | Our code, with Google's `<model-viewer>` (`lux3d.js`) |
 | Game rules, shoppers, rivals, results | Our code (`game.js`) |
 
-**Submission materials:** the project report (PDF), a 1:30 demo video, this repository, and an X post with #Manycorehackathon.
+**Submission materials:** [project report (PDF)](docs/Forgeville-3D-Project-Report.pdf), [demo video](docs/Forgeville-3D-Demo.mp4), this repository, and an X post with #Manycorehackathon. Everything is listed in [SUBMISSION.md](SUBMISSION.md).
 
 ## Built with Aholo Lux3D
 
