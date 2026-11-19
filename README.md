@@ -12,6 +12,29 @@ Entry for the **Manycore Aholo Global 3D AI Hackathon** ("Play in 3D, Create wit
 
 ---
 
+## For judges: how to check this entry
+
+**Play it:** [forgeville.myacxt.site](https://forgeville.myacxt.site). It works in Chrome, Edge, Safari or Firefox on desktop or phone, with nothing to install. The first load downloads about 11 MB of 3D models, so give it a few seconds.
+
+**What to look at (about 3 minutes):**
+
+1. **The 3D market square** (left panel). It opens in 3D: three stalls built in code, with the **Lux3D products on the counters** in each shop's colours. Drag to look around. "2D view" switches back to the original town.
+2. **The workbench** (centre). The product you are designing is the **live Lux3D model**. Drag it to turn it.
+3. **Design something.** Under the workbench, pick a product (jacket, tote bag, sneakers, cap), a material and a colour. Watch the model change: colour repaints it; canvas is matte, waterproof is glossy, premium has a soft sheen. Your stall in the 3D market updates too.
+4. **Open your stall.** Set a price and batch size, then press **"Produce & open your stall"**. Shoppers walk up to the 3D stalls and buy or say why they passed. Try the live moves (flash sale, hype, restock) while they decide.
+5. **Read the results.** See who bought, why, and how the rival shops react. A season is five rounds. The **Guide** button (top right) explains every step.
+
+**What was made with Aholo, and what was built by us:**
+
+| Part | Made with |
+|---|---|
+| The four products: jacket, tote bag, sneakers, cap | **Aholo Lux3D** (reference images from the Aholo3D image generator, then Lux3D image to 3D; jacket and tote on Standard, sneakers and cap on Turbo) |
+| The 3D market square: stalls, awnings, ground, trees | Our code, with three.js (`market3d.js`) |
+| Workbench viewer, recolouring and material finishes | Our code, with Google's `<model-viewer>` (`lux3d.js`) |
+| Game rules, shoppers, rivals, results | Our code (`game.js`) |
+
+**Submission materials:** the project report (PDF), a 1:30 demo video, this repository, and an X post with #Manycorehackathon.
+
 ## Built with Aholo Lux3D
 
 The whole game is about the thing you make: its shape, its colour and its material. In flat 2D art, a waterproof jacket and a canvas jacket looked almost the same, and modelling every product in 3D by hand is out of reach for a solo developer. Aholo Lux3D closes that gap.
