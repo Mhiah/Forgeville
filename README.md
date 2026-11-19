@@ -1,27 +1,42 @@
-# Forgeville — The Workshop Game
+# Forgeville 3D: The Workshop Game
 
-**Design, price and sell to a town of NPC shoppers who remember you, in a cozy workshop strategy game.**
+**A cozy workshop strategy game where every product in the town market is a 3D model generated with Aholo Lux3D.**
 
-Forgeville is a browser strategy game about running a small workshop in a living town. Each market day the town wants something different. You design a product, set its price, pay for a batch, then open your stall and watch 18+ shoppers decide, one by one, whether you got it right.
+Forgeville is a browser strategy game about running a small workshop in a living town. Each market day the town wants something different. You design a product, set its price, pay for a batch, then open your stall and watch 18+ shoppers decide, one by one, whether you got it right. The products you make (a jacket, a tote bag, sneakers and a cap) are real 3D models generated with **[Aholo Lux3D](https://3d.aholo.ai)**.
 
-▶ **Play:** [forgeville.myacxt.site](https://forgeville.myacxt.site) · or open `forgeville-playable.html` in any browser (single file, works offline)
+▶ **Play:** [forgeville.myacxt.site](https://forgeville.myacxt.site)
 
-Entry for the **Manycore Aholo Global 3D AI Hackathon** (and earlier the Loadout AI Game Competition) · Solo developer: Mia ([@Mhiah](https://github.com/Mhiah))
-
-## Forgeville 3D: every product is generated with Aholo Lux3D
-
-Forgeville started as a 2D game with hand-drawn product art. For the Aholo hackathon, every product in the town market is now a 3D model generated with **[Aholo Lux3D](https://3d.aholo.ai)**, Manycore Tech's 3D generation model.
-
-- **A live 3D workbench.** The product you're designing sits on your workbench as a real 3D model. It turns slowly, and you can drag to spin it and inspect it from any side before you commit coins to a batch.
-- **Your choices repaint the model.** Pick a colour and the Lux3D model is recoloured on the spot. Pick a material and its surface changes: canvas is matte, waterproof is glossy and premium has a soft sheen.
-- **The whole market is built from Lux3D assets.** The same models are rendered in every colour when the game loads. The goods on your stall, your rivals' stalls and the rival cards all use those renders, so the town is built from Lux3D assets too.
-- **One model per product.** The jacket, tote bag, sneakers and cap were each generated with Lux3D in a plain light finish, so the game can tint them to any of the six town colours.
-
-How it works: `lux3d.js` loads the Lux3D `.glb` files from `assets/models/` into Google's open-source [`<model-viewer>`](https://modelviewer.dev) (vendored in `vendor/`). It sets each material's base colour, roughness and metalness from your design. A hidden viewer renders every product and colour combination to an image for the stalls. If a model file is missing, the game falls back to its original 2D art, so it always runs.
+Entry for the **Manycore Aholo Global 3D AI Hackathon** ("Play in 3D, Create with Aholo") · #Manycorehackathon · Solo developer: Mia ([@Mhiah](https://github.com/Mhiah))
 
 ![Forgeville on desktop](docs/screenshots/desktop.png)
 
 ---
+
+## Built with Aholo Lux3D
+
+The whole game is about the thing you make: its shape, its colour and its material. In flat 2D art, a waterproof jacket and a canvas jacket looked almost the same, and modelling every product in 3D by hand is out of reach for a solo developer. Aholo Lux3D closes that gap.
+
+- **A live 3D workbench.** The product you're designing sits on your workbench as a real 3D model. It turns slowly, and you can drag it to inspect it from any side before you spend coins on a batch.
+- **Your choices repaint the model.** Pick a colour and the Lux3D model is recoloured on the spot. Pick a material and its surface changes: canvas is matte, recycled is soft, waterproof is glossy and premium has a soft sheen.
+- **A market built from Lux3D assets.** When the game loads, every model is rendered in every town colour. Those renders are the goods on your stall, on your rivals' stalls and on the rival cards.
+- **Four models, 96 variations.** The jacket, tote bag, sneakers and cap were each generated once in a plain white finish, so the game can paint them in 6 colours × 4 materials.
+
+### How the assets were made
+
+| Step | What happens |
+|---|---|
+| 1. Prompt | Each product is described in plain white with no logos, so the game can tint it any colour. |
+| 2. Aholo image | A reference image is generated in the Aholo3D workspace. |
+| 3. Lux3D | Lux3D turns the image into a textured PBR 3D model (Standard model, 100K faces), exported as GLB. |
+| 4. In the game | `lux3d.js` loads the GLB on the workbench and sets each material's colour, roughness and metalness from the player's design. |
+| 5. The market | A hidden viewer renders every product in every colour; those images become the stall and rival art. |
+
+Prompts used:
+
+- **Jacket:** a single zip-up rain jacket with hood down and two front pockets, standing upright, plain pure white fabric, no logos, no text, three-quarter front view, plain light grey background.
+- **Tote bag:** a single canvas tote bag with two handles, standing upright, plain pure white fabric, no logos, no text, three-quarter front view, plain light grey background.
+- **Sneakers:** a single low-top lace-up sneaker, plain pure white upper and sole, no logos, no text, three-quarter side view, plain light grey background.
+- **Cap:** a single baseball cap with a curved brim, plain pure white fabric, no logos, no text, three-quarter front view, plain light grey background.
 
 ## The idea
 
@@ -63,7 +78,6 @@ A six-step illustrated **Guide** is in the top-right corner of the game.
 | **Live market moves** | Flash sales, hype and restocks let you respond while shoppers are deciding, guided by hints based on what they're saying. |
 | **Town events** | One surprise per round changes demand partway through a market day. |
 | **Readable results** | Every round explains *why*: trend match, quality, price reach, competition, what passers-by said, how each move performed and who crossed the street. |
-| **$FORGE buyback & burn (preview)** | 3% of every sale funds the town treasury. After each market day it buys back simulated $FORGE and burns it; hype burns $FORGE too. A live price chart shows the effect. |
 | **A living town** | Animated shoppers with faces, hairstyles and moods; rival stalls; season standings; town memory panel. |
 
 <p align="center">
@@ -73,52 +87,29 @@ A six-step illustrated **Guide** is in the top-right corner of the game.
 
 ## How AI was used
 
-AI coding assistants were used throughout development, with Mia directing the design, gameplay decisions and testing:
+Mia directed the design, gameplay and testing. AI was used in three ways:
 
 - **Building the game:** the first playable prototype (economy, product designer, three shopper types) and every later system (the animated town, shopper memory, copycat rivals, live moves, town events, the guide) were written with AI coding assistants from Mia's direction and feedback.
 - **The shopper model:** shoppers are "AI-style" agents. Each one scores a product on price against their budget, trend fit, material quality, competition and their memory of your stall, then decides and explains the decision in their own words.
 - **Testing:** AI-driven browser playtests played full five-round seasons on desktop and phone screen sizes after every change, checking the economy, the visitor counts and console errors, and capturing screenshots for review.
-- **Art:** all characters, products and town scenery are drawn in code (SVG and CSS), so there is no generated or stock imagery.
+- **3D products:** every product is a 3D model generated with Aholo Lux3D. Characters and town scenery are drawn in code (SVG and CSS).
 
-## Development plan
+## What's next
 
-Forgeville is a playable demo. The plan, in order:
-
-1. **Polish the core loop.** Sound and music, saved progress, a guided first round, balancing passes on prices and shopper budgets, accessibility (keyboard play, reduced motion is already supported).
-2. **Deepen the town.** More products and materials, seasons that change across a year, workshop upgrades and staff, more events, and townsfolk with relationships (friends recommend your stall to each other).
-3. **Talking townsfolk.** Optional LLM-written dialogue on top of the deterministic shopper model, so regulars chat about your designs, gossip about rivals and react to town events in their own voice, without changing the fairness of the simulation.
-4. **Competitive seasons.** Asynchronous multiplayer: players' workshops share one town and one set of shoppers, with weekly season leaderboards.
-5. **Creator layer.** Player designs become collectible **design cards** (NFTs) that players own. When another player remixes a design, its creator earns the remix royalty, turning the copycat mechanic already in the game into a real creator economy.
-6. **Token launch.** Introduce the Forgeville token on top of the shared economy (see *Token design* below).
-7. **Launch.** Mobile-friendly web release first, then wider distribution with Loadout.
-
-### Token design
-
-The token is built on hooks that already exist in the game. **Buyback & burn is already playable as a simulated preview:** the treasury buys $FORGE from a market pool after every market day and burns it, and hype spending burns $FORGE directly.
-
-| In the game today (simulated) | With the token |
-|---|---|
-| 3% of every sale funds the **town treasury** | An onchain treasury that pays season prizes and funds design challenges |
-| Rivals pay a **7% royalty** when they copy your hit | Creators earn royalties when other players remix their design cards |
-| **Hype** costs coins to draw shoppers: half is burned, half goes to the treasury | Token spent on hype and promotion is burned (a sink) |
-| Treasury **buys back and burns** $FORGE after every market day | Onchain buyback & burn funded by real game fees |
-| **Season standings** against two rival shops | Token-entry competitive seasons with prize pools and leaderboards |
-| The Gazette sets each round's **trend** | Holders vote on next season's trends, town events and design challenges, so the community runs the town |
-
-Design principles:
-
-- **Fair play first.** Coins stay a free in-round currency, so winning a market day depends on reading the town, not on spending. The token lives at the meta layer: entry, ownership, cosmetics, upgrades and governance.
-- **Real utility over speculation.** Every token use is tied to something players already do in the game.
-- **Sinks balance sources.** Hype, stall skins, workshop upgrades and named townsfolk are sinks; prizes and royalties are sources.
+1. **Make your own product.** Players type a product idea, Lux3D generates it in the game, and every workshop sells something no one else has.
+2. **A 3D town.** Lux3D shopkeepers and townsfolk, and a full 3D town square built with Aholo SpatialGen.
+3. **Polish the core loop.** Sound and music, saved progress, a guided first round and balancing passes on prices and shopper budgets.
+4. **Deepen the town.** More products and materials, seasons across a year, more events, and townsfolk who recommend your stall to their friends.
+5. **Talking townsfolk.** Optional LLM-written dialogue on top of the shopper model, so regulars chat about your designs and gossip about rivals.
 
 ## Run it locally
 
-No build step and no dependencies.
+No build step and no install. The 3D viewer ([`<model-viewer>`](https://modelviewer.dev), open source) is included in `vendor/`. Serve the folder with any static server so the browser can load the 3D models:
 
 ```bash
 git clone https://github.com/Mhiah/Forgeville.git
 cd Forgeville
-open index.html          # or double-click forgeville-playable.html
+python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
 | File | Purpose |
@@ -126,11 +117,14 @@ open index.html          # or double-click forgeville-playable.html
 | `index.html` | Layout, town scene and panels |
 | `style.css` | Styling, characters and animation |
 | `game.js` | Economy, shopper model, town memory, rivals, events, animation and guide |
-| `forgeville-playable.html` | Single-file build of the three files above |
+| `lux3d.js` | Loads the Aholo Lux3D models, repaints them from the player's design and renders the stall art |
+| `assets/models/` | The four product models generated with Aholo Lux3D (`.glb`) |
+| `vendor/model-viewer.min.js` | Google's open-source 3D viewer |
+| `forgeville-playable.html` | Older single-file 2D build (no 3D models) |
 | `tools/build_single_file.py` | Rebuilds the single-file version: `python3 tools/build_single_file.py` |
 | `vercel.json`, `netlify.toml` | Hosting config: a static site with no build step, deployed from `main` |
 
-The economy is simulated in the browser: coins, design cards, royalties and the town treasury are game mechanics. No wallet, token or NFT is involved in this version.
+The economy is simulated in the browser: coins, design cards, royalties and the town treasury are game mechanics. Generated 3D assets are subject to Aholo's terms of use.
 
 ---
 

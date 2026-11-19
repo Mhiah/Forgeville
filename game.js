@@ -1,5 +1,5 @@
 /* Forgeville — self-contained game economy. All currencies, shoppers and designs are
- * simulated. No blockchain connection, minting or token launch is performed. */
+ * simulated in the browser. Products are 3D models generated with Aholo Lux3D (see lux3d.js). */
 'use strict';
 
 const TEMPLATES = [
@@ -373,7 +373,7 @@ function movesPanel(report){const m=report.moves;const rows=[];
  if(report.copySales)rows.push(`<li><b>📋 Copycat royalties</b> Your copied design sold ${report.copySales} times across the street, earning you ◈ ${money(report.royaltiesIn)}.</li>`);
  if(report.copiedBy)rows.push(`<li><b>📋 You’ve been copied!</b> ${htmlEscape(report.copiedBy.shop)} will sell your design next round at ◈ ${report.copiedBy.price}. You earn 7% of every copy, but making the same thing again means competing with your own copy.</li>`);
  if(report.fightBack)rows.push(`<li><b>📉 Rivals fight back</b> You out-sold ${htmlEscape(report.fightBack.join(' and '))}. Next round they’ll undercut your prices and draw extra regulars.</li>`);
- if(report.buyback)rows.push(`<li><b>🔥 Buyback &amp; burn</b> The town treasury bought back ${fmtTok(report.buyback.tokens)} $FORGE with ◈ ${money(report.buyback.coins)} and burned it${report.hypeBurn?`, plus ${fmtTok(report.hypeBurn)} burned from your hype`:''}. Price ${report.tokenMove.after>=report.tokenMove.before?'▲':'▼'} ${Math.abs((report.tokenMove.after/report.tokenMove.before-1)*100).toFixed(1)}%.</li>`);
+ if(false&&report.buyback)rows.push(`<li><b>🔥 Buyback &amp; burn</b> The town treasury bought back ${fmtTok(report.buyback.tokens)} $FORGE with ◈ ${money(report.buyback.coins)} and burned it${report.hypeBurn?`, plus ${fmtTok(report.hypeBurn)} burned from your hype`:''}. Price ${report.tokenMove.after>=report.tokenMove.before?'▲':'▼'} ${Math.abs((report.tokenMove.after/report.tokenMove.before-1)*100).toFixed(1)}%.</li>`);
  return `<div class="moves-panel"><h4>Your moves, regulars &amp; rivals</h4><ul>${rows.join('')}</ul></div>`;}
 function currentRivals(round=run.round){const base=TRENDS[round].rivals;const o=run.rivalCopies&&run.rivalCopies[round];const tac=run.rivalTactics&&run.rivalTactics[round];
  return base.map((r,i)=>{let x=o&&o[i]?{...r,...o[i]}:r;if(tac&&tac[i])x={...x,price:Math.max(15,Math.round(x.price*tac[i].priceMult)),undercut:true,boost:tac[i].boost};return x;});}
@@ -430,7 +430,7 @@ const GUIDE_STEPS=[
   visual:()=>`<div class="guide-memory"><div class="guide-npc-wrap fan">${npcMarkup('luxury','#e5c3a7','long','#5a3a26','happy')}<span>“I loved the storm blue jacket I got here!”</span></div><div class="guide-copy"><span class="copy-tag">COPY</span> Wren &amp; Co. sells your design · <b>+7% to you</b></div></div>`},
  {kicker:'STEP 6 · FIVE ROUNDS',title:'Win the season.',
   body:'Five market days. Between rounds, spend profit on workshop upgrades. Rivals you out-sell will fight back with lower prices. Earn up to 3 stars: top the standings, reach ◈ 2,000 workshop value and win 12 loyal fans.',
-  visual:()=>`<div class="guide-standings"><div class="you"><span>1</span>Your workshop<b>◈ 2,239</b></div><div><span>2</span>Pip Studio<b>◈ 1,620</b></div><div><span>3</span>Wren &amp; Co.<b>◈ 1,401</b></div></div><p class="guide-fineprint">Coins, design cards, royalties, the treasury and $FORGE are simulated in your browser. No real tokens, NFTs or wallets.</p>`},
+  visual:()=>`<div class="guide-standings"><div class="you"><span>1</span>Your workshop<b>◈ 2,239</b></div><div><span>2</span>Pip Studio<b>◈ 1,620</b></div><div><span>3</span>Wren &amp; Co.<b>◈ 1,401</b></div></div><p class="guide-fineprint">Coins, shoppers, rivals and the town treasury are all simulated in your browser.</p>`},
 ];
 let guideStep=0;
 function renderGuide(){const s=GUIDE_STEPS[guideStep];const last=guideStep===GUIDE_STEPS.length-1;const root=$('modalRoot');
