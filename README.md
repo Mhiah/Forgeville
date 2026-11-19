@@ -19,6 +19,7 @@ The whole game is about the thing you make: its shape, its colour and its materi
 - **A live 3D workbench.** The product you're designing sits on your workbench as a real 3D model. It turns slowly, and you can drag it to inspect it from any side before you spend coins on a batch.
 - **Your choices repaint the model.** Pick a colour and the Lux3D model is recoloured on the spot. Pick a material and its surface changes: canvas is matte, recycled is soft, waterproof is glossy and premium has a soft sheen.
 - **A market built from Lux3D assets.** When the game loads, every model is rendered in every town colour. Those renders are the goods on your stall, on your rivals' stalls and on the rival cards.
+- **A 3D market square.** Press **3D view** on the town square to see the market in 3D: three stalls with striped awnings, trees and a cobbled square, built in code with three.js. The Lux3D products sit on the counters in each shop's real colour and material, your stall updates as you design, and shoppers walk up in front of the stalls. Drag to look around.
 - **Four models, 96 variations.** The jacket, tote bag, sneakers and cap were each generated once in a plain white finish, so the game can paint them in 6 colours × 4 materials.
 
 ### How the assets were made
@@ -120,6 +121,8 @@ python3 -m http.server 8000   # then open http://localhost:8000
 | `lux3d.js` | Loads the Aholo Lux3D models, repaints them from the player's design and renders the stall art |
 | `assets/models/` | The four product models generated with Aholo Lux3D (`.glb`) |
 | `vendor/model-viewer.min.js` | Google's open-source 3D viewer |
+| `market3d.js` | The 3D market square (three.js): stalls, ground and trees built in code, with the Lux3D products on the counters |
+| `vendor/three/` | three.js (open source, MIT licence) |
 | `forgeville-playable.html` | Older single-file 2D build (no 3D models) |
 | `tools/build_single_file.py` | Rebuilds the single-file version: `python3 tools/build_single_file.py` |
 | `vercel.json`, `netlify.toml` | Hosting config: a static site with no build step, deployed from `main` |
