@@ -19,7 +19,7 @@ The whole game is about the thing you make: its shape, its colour and its materi
 - **A live 3D workbench.** The product you're designing sits on your workbench as a real 3D model. It turns slowly, and you can drag it to inspect it from any side before you spend coins on a batch.
 - **Your choices repaint the model.** Pick a colour and the Lux3D model is recoloured on the spot. Pick a material and its surface changes: canvas is matte, recycled is soft, waterproof is glossy and premium has a soft sheen.
 - **A market built from Lux3D assets.** When the game loads, every model is rendered in every town colour. Those renders are the goods on your stall, on your rivals' stalls and on the rival cards.
-- **A 3D market square.** Press **3D view** on the town square to see the market in 3D: three stalls with striped awnings, trees and a cobbled square, built in code with three.js. The Lux3D products sit on the counters in each shop's real colour and material, your stall updates as you design, and shoppers walk up in front of the stalls. Drag to look around.
+- **A 3D market square.** The town square opens in 3D (press **2D view** to switch back): three stalls with striped awnings, trees and a cobbled square, built in code with three.js. The Lux3D products sit on the counters in each shop's real colour and material, your stall updates as you design, and shoppers walk up in front of the stalls. Drag to look around.
 - **Four models, 96 variations.** The jacket, tote bag, sneakers and cap were each generated once in a plain white finish, so the game can paint them in 6 colours × 4 materials.
 
 ### How the assets were made

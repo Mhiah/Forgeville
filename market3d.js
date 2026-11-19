@@ -1,8 +1,8 @@
 /* Forgeville 3D market square.
  * The stalls, ground and trees are built in code with three.js. The products on
  * the counters are the Aholo Lux3D models from assets/models/, shown in each
- * shop's real colour and material. Opened with the "3D view" button on the
- * town square; the 2D town keeps working underneath. */
+ * shop's real colour and material. The town square opens in 3D; the "2D view"
+ * button switches back to the original 2D town, which keeps working underneath. */
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -196,6 +196,8 @@ function init() {
   row.appendChild(btn);
   window.addEventListener('resize', () => { if (built) resize(); });
   window.Market3D = { show, refresh };
+  // The town square opens in 3D; "2D view" switches back
+  try { show(true); } catch (e) { console.warn('3D market unavailable', e); }
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
