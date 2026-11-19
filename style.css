@@ -239,3 +239,5 @@
 .token-stats span{display:block;font-size:10px;color:#6f7d70}.token-stats b{display:block;font-size:14px;margin-top:2px}.token-stats small{font-size:9px;color:#98a196}
 .token-note{font-size:11px!important;line-height:1.5!important;margin:8px 0 0!important}
 .npc.speaking{z-index:900!important}
+
+.product-illustration.is-3d{width:100%;height:100%;position:absolute;inset:0}.product-illustration model-viewer{width:100%;height:100%;--poster-color:transparent;background:transparent;cursor:grab}.product-illustration model-viewer:active{cursor:grabbing}.lux3d-badge{background:#2f2a4ad9;color:#efeaff;padding:6px 10px;border-radius:6px;font-size:9px;font-weight:900;letter-spacing:1px;margin-left:auto;margin-right:10px}.lux3d-badge[hidden]{display:none}.stage-topline,.stage-bottom{pointer-events:none}

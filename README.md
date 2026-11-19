@@ -6,7 +6,18 @@ Forgeville is a browser strategy game about running a small workshop in a living
 
 ▶ **Play:** [forgeville.myacxt.site](https://forgeville.myacxt.site) · or open `forgeville-playable.html` in any browser (single file, works offline)
 
-Entry for the **Loadout AI Game Competition** · Stage: **Playable demo** · Solo developer: Mia ([@Mhiah](https://github.com/Mhiah))
+Entry for the **Manycore Aholo Global 3D AI Hackathon** (and earlier the Loadout AI Game Competition) · Solo developer: Mia ([@Mhiah](https://github.com/Mhiah))
+
+## Forgeville 3D: every product is generated with Aholo Lux3D
+
+Forgeville started as a 2D game with hand-drawn product art. For the Aholo hackathon, every product in the town market is now a 3D model generated with **[Aholo Lux3D](https://3d.aholo.ai)**, Manycore Tech's 3D generation model.
+
+- **A live 3D workbench.** The product you're designing sits on your workbench as a real 3D model. It turns slowly, and you can drag to spin it and inspect it from any side before you commit coins to a batch.
+- **Your choices repaint the model.** Pick a colour and the Lux3D model is recoloured on the spot. Pick a material and its surface changes: canvas is matte, waterproof is glossy and premium has a soft sheen.
+- **The whole market is built from Lux3D assets.** The same models are rendered in every colour when the game loads. The goods on your stall, your rivals' stalls and the rival cards all use those renders, so the town is built from Lux3D assets too.
+- **One model per product.** The jacket, tote bag, sneakers and cap were each generated with Lux3D in a plain light finish, so the game can tint them to any of the six town colours.
+
+How it works: `lux3d.js` loads the Lux3D `.glb` files from `assets/models/` into Google's open-source [`<model-viewer>`](https://modelviewer.dev) (vendored in `vendor/`). It sets each material's base colour, roughness and metalness from your design. A hidden viewer renders every product and colour combination to an image for the stalls. If a model file is missing, the game falls back to its original 2D art, so it always runs.
 
 ![Forgeville on desktop](docs/screenshots/desktop.png)
 
