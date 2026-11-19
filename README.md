@@ -18,7 +18,7 @@ Entry for the **Manycore Aholo Global 3D AI Hackathon** ("Play in 3D, Create wit
 
 **What to look at (about 3 minutes):**
 
-1. **The 3D market square** (left panel). It opens in 3D: three stalls built in code, with the **Lux3D products on the counters** in each shop's colours. Drag to look around. "2D view" switches back to the original town.
+1. **The 3D market square** (left panel). It opens in 3D: three stalls built in code, with the **Lux3D products on the counters** in each shop's colours. Drag to look around.
 2. **The workbench** (centre). The product you are designing is the **live Lux3D model**. Drag it to turn it.
 3. **Design something.** Under the workbench, pick a product (jacket, tote bag, sneakers, cap), a material and a colour. Watch the model change: colour repaints it; canvas is matte, waterproof is glossy, premium has a soft sheen. Your stall in the 3D market updates too.
 4. **Open your stall.** Set a price and batch size, then press **"Produce & open your stall"**. Shoppers walk up to the 3D stalls and buy or say why they passed. Try the live moves (flash sale, hype, restock) while they decide.
@@ -37,12 +37,12 @@ Entry for the **Manycore Aholo Global 3D AI Hackathon** ("Play in 3D, Create wit
 
 ## Built with Aholo Lux3D
 
-The whole game is about the thing you make: its shape, its colour and its material. In flat 2D art, a waterproof jacket and a canvas jacket looked almost the same, and modelling every product in 3D by hand is out of reach for a solo developer. Aholo Lux3D closes that gap.
+The whole game is about the thing you make: its shape, its colour and its material. Modelling every product in 3D by hand is out of reach for a solo developer, so each product was generated once with Aholo Lux3D and the game recolours and refinishes it as you play.
 
 - **A live 3D workbench.** The product you're designing sits on your workbench as a real 3D model. It turns slowly, and you can drag it to inspect it from any side before you spend coins on a batch.
 - **Your choices repaint the model.** Pick a colour and the Lux3D model is recoloured on the spot. Pick a material and its surface changes: canvas is matte, recycled is soft, waterproof is glossy and premium has a soft sheen.
 - **A market built from Lux3D assets.** When the game loads, every model is rendered in every town colour. Those renders are the goods on your stall, on your rivals' stalls and on the rival cards.
-- **A 3D market square.** The town square opens in 3D (press **2D view** to switch back): three stalls with striped awnings, trees and a cobbled square, built in code with three.js. The Lux3D products sit on the counters in each shop's real colour and material, your stall updates as you design, and shoppers walk up in front of the stalls. Drag to look around.
+- **A 3D market square.** The town square is a 3D market: three stalls with striped awnings, trees and a cobbled square, built in code with three.js. The Lux3D products sit on the counters in each shop's real colour and material, your stall updates as you design, and shoppers walk up in front of the stalls. Drag to look around.
 - **Four models, 96 variations.** The jacket, tote bag, sneakers and cap were each generated once in a plain white finish, so the game can paint them in 6 colours × 4 materials.
 
 ### How the assets were made
@@ -71,8 +71,7 @@ The town has **24 named townsfolk** in three kinds (bargain hunters, trend chase
 The core tension: **you can't design for everybody.**
 
 <p align="center">
-  <img src="docs/screenshots/market-day.png" width="420" alt="Market day: shoppers walk to the stalls in the rain while a flash sale runs and a rival sells a copy of your design">
-  <img src="docs/screenshots/phone.png" width="260" alt="Forgeville on a phone, opening on the town square">
+  <img src="docs/screenshots/market-3d.png" width="460" alt="Market day in the 3D market square: Lux3D jackets, sneakers and tote bags on the stall counters while shoppers walk up">
 </p>
 
 ## How to play
@@ -103,11 +102,6 @@ A six-step illustrated **Guide** is in the top-right corner of the game.
 | **Town events** | One surprise per round changes demand partway through a market day. |
 | **Readable results** | Every round explains *why*: trend match, quality, price reach, competition, what passers-by said, how each move performed and who crossed the street. |
 | **A living town** | Animated shoppers with faces, hairstyles and moods; rival stalls; season standings; town memory panel. |
-
-<p align="center">
-  <img src="docs/screenshots/results.png" width="360" alt="Round results explaining moves, fans and why shoppers decided">
-  <img src="docs/screenshots/guide.png" width="320" alt="The in-game guide">
-</p>
 
 ## How AI was used
 
@@ -146,8 +140,6 @@ python3 -m http.server 8000   # then open http://localhost:8000
 | `vendor/model-viewer.min.js` | Google's open-source 3D viewer |
 | `market3d.js` | The 3D market square (three.js): stalls, ground and trees built in code, with the Lux3D products on the counters |
 | `vendor/three/` | three.js (open source, MIT licence) |
-| `forgeville-playable.html` | Older single-file 2D build (no 3D models) |
-| `tools/build_single_file.py` | Rebuilds the single-file version: `python3 tools/build_single_file.py` |
 | `vercel.json`, `netlify.toml` | Hosting config: a static site with no build step, deployed from `main` |
 
 The economy is simulated in the browser: coins, design cards, royalties and the town treasury are game mechanics. Generated 3D assets are subject to Aholo's terms of use.

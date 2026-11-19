@@ -3,8 +3,7 @@
  * (https://3d.aholo.ai). The workbench shows the live model: players spin it,
  * and their colour and material choices repaint it in real time. The same
  * models are rendered into the stall, rival and guide art, so the whole market
- * is built from Lux3D assets. If a model file is missing, the game falls back
- * to its original 2D illustration. */
+ * is built from Lux3D assets. */
 'use strict';
 
 const LUX3D = {

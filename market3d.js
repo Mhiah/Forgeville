@@ -1,8 +1,7 @@
 /* Forgeville 3D market square.
  * The stalls, ground and trees are built in code with three.js. The products on
  * the counters are the Aholo Lux3D models from assets/models/, shown in each
- * shop's real colour and material. The town square opens in 3D; the "2D view"
- * button switches back to the original 2D town, which keeps working underneath. */
+ * shop's real colour and material. The town square is shown as this 3D scene. */
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -175,8 +174,6 @@ let refreshTimer = null;
 function show(on) {
   visible = on;
   host.classList.toggle('show-3d', on);
-  const btn = document.getElementById('market3dToggle');
-  if (btn) { btn.textContent = on ? '2D view' : '3D view'; btn.setAttribute('aria-pressed', on); }
   if (on) {
     if (!built) build();
     resize(); lastSig = ''; refresh();
@@ -189,14 +186,9 @@ function init() {
   host = document.getElementById('marketScene');
   const row = document.querySelector('.town-title-row');
   if (!host || !row) return;
-  const btn = document.createElement('button');
-  btn.type = 'button'; btn.id = 'market3dToggle'; btn.className = 'market3d-toggle'; btn.textContent = '3D view';
-  btn.setAttribute('aria-pressed', 'false');
-  btn.addEventListener('click', () => show(!visible));
-  row.appendChild(btn);
   window.addEventListener('resize', () => { if (built) resize(); });
   window.Market3D = { show, refresh };
-  // The town square opens in 3D; "2D view" switches back
+  // The town square is the 3D market
   try { show(true); } catch (e) { console.warn('3D market unavailable', e); }
 }
 
