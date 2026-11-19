@@ -14,6 +14,8 @@ const LUX3D = {
     sneakers: 'assets/models/sneakers.glb',
     cap: 'assets/models/cap.glb',
   },
+  // Camera angle per model, so each product faces the player
+  orbit: { cap: '215deg 70deg auto' },
   available: {},
   shots: {},
   shotsDone: false,
@@ -81,8 +83,10 @@ function lux3dPreview(d) {
   mv._design = { ...d };
   mv.setAttribute('alt', `${lux3dColorHex(d.color)} ${d.material} ${d.template}, a 3D model generated with Aholo Lux3D`);
   const src = LUX3D.models[d.template];
-  if (mv.getAttribute('src') !== src) mv.setAttribute('src', src);
-  else lux3dApplyLook(mv, d);
+  if (mv.getAttribute('src') !== src) {
+    mv.setAttribute('camera-orbit', LUX3D.orbit[d.template] || '30deg 72deg auto');
+    mv.setAttribute('src', src);
+  } else lux3dApplyLook(mv, d);
   const badge = document.getElementById('lux3dBadge');
   if (badge) badge.hidden = false;
   return true;
@@ -107,6 +111,7 @@ async function lux3dRenderShots() {
     await new Promise(res => {
       const done = () => { mv.removeEventListener('load', done); res(); };
       mv.addEventListener('load', done);
+      mv.setAttribute('camera-orbit', LUX3D.orbit[t] || '28deg 70deg auto');
       mv.setAttribute('src', LUX3D.models[t]);
       setTimeout(done, 15000);
     });

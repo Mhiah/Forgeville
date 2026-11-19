@@ -8,7 +8,7 @@ Forgeville is a browser strategy game about running a small workshop in a living
 
 Entry for the **Manycore Aholo Global 3D AI Hackathon** ("Play in 3D, Create with Aholo") · #Manycorehackathon · Solo developer: Mia ([@Mhiah](https://github.com/Mhiah))
 
-![Forgeville on desktop](docs/screenshots/desktop.png)
+![Forgeville 3D on desktop: the Lux3D jacket on the workbench and in the market stalls](docs/screenshots/desktop-3d.png)
 
 ---
 
@@ -27,7 +27,7 @@ The whole game is about the thing you make: its shape, its colour and its materi
 |---|---|
 | 1. Prompt | Each product is described in plain white with no logos, so the game can tint it any colour. |
 | 2. Aholo image | A reference image is generated in the Aholo3D workspace. |
-| 3. Lux3D | Lux3D turns the image into a textured PBR 3D model (Standard model, 100K faces), exported as GLB. |
+| 3. Lux3D | Lux3D turns the image into a textured 3D model (Standard for the jacket and tote, Turbo for the sneakers and cap), exported as GLB. Textures are resized to 1024 px WebP so the game loads fast. |
 | 4. In the game | `lux3d.js` loads the GLB on the workbench and sets each material's colour, roughness and metalness from the player's design. |
 | 5. The market | A hidden viewer renders every product in every colour; those images become the stall and rival art. |
 

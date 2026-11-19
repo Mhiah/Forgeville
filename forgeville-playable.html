@@ -258,6 +258,9 @@
 .token-stats span{display:block;font-size:10px;color:#6f7d70}.token-stats b{display:block;font-size:14px;margin-top:2px}.token-stats small{font-size:9px;color:#98a196}
 .token-note{font-size:11px!important;line-height:1.5!important;margin:8px 0 0!important}
 .npc.speaking{z-index:900!important}
+
+.product-illustration.is-3d{width:100%;height:100%;position:absolute;inset:0}.product-illustration model-viewer{width:100%;height:100%;--poster-color:transparent;background:transparent;cursor:grab}.product-illustration model-viewer:active{cursor:grabbing}.lux3d-badge{background:#2f2a4ad9;color:#efeaff;padding:6px 10px;border-radius:6px;font-size:9px;font-weight:900;letter-spacing:1px;margin-left:auto;margin-right:10px}.lux3d-badge[hidden]{display:none}.stage-topline,.stage-bottom{pointer-events:none}
+#tokenPanel[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -301,11 +304,10 @@
         <section class="community-panel">
           <div class="community-header"><span class="leaf-symbol">❀</span><span>TOWN NOTICEBOARD</span></div>
           <h3>Every sale fuels the town.</h3>
-          <p>3% of every sale goes to the town treasury, which buys back and burns $FORGE.</p>
+          <p>3% of every sale goes to the town treasury, which pays for Forgeville's market days.</p>
           <div class="community-total"><span>Town treasury</span><strong><span class="coin">◈</span> <span id="treasuryCoins">0</span></strong></div>
-          <div class="token-panel" id="tokenPanel"></div>
-          <p class="token-note">After every market day the treasury spends half its balance buying back $FORGE and burning it. Hype burns $FORGE too.</p>
-          <div class="sim-flag">SIMULATED $FORGE PREVIEW · NOT A REAL TOKEN</div>
+          <div class="token-panel" id="tokenPanel" hidden></div>
+          
         </section>
       </aside>
 
@@ -314,7 +316,7 @@
         <div class="workshop-heading"><div><h2>Make your next hit.</h2><p>Good design is a gamble. The town decides.</p></div><span class="stamp">MADE<br>IN<br>FORGEVILLE</span></div>
 
         <div class="product-stage" id="productStage">
-          <div class="stage-topline"><span class="stage-pill">✦ YOUR LATEST DESIGN</span><span class="stage-count" id="designSerial">FV–001</span></div>
+          <div class="stage-topline"><span class="stage-pill">✦ YOUR LATEST DESIGN</span><span class="lux3d-badge" id="lux3dBadge" hidden>3D · AHOLO LUX3D · DRAG TO SPIN</span><span class="stage-count" id="designSerial">FV–001</span></div>
           <div class="product-illustration" id="productIllustration" aria-label="Product preview"></div>
           <div class="stage-bottom"><div><span class="preview-label">WORKBENCH PREVIEW</span><strong id="previewProductName">The Everyday Jacket</strong></div><div class="quality-tag" id="qualityTag">● BALANCED</div></div>
         </div>
@@ -373,15 +375,17 @@
         <div class="shopper-personas"><div class="persona"><span class="persona-icon bargain">◈</span><div><strong>Bargain hunters</strong><small>Live for a good deal</small></div></div><div class="persona"><span class="persona-icon trend">✳</span><div><strong>Trend chasers</strong><small>Want what's in style</small></div></div><div class="persona"><span class="persona-icon luxury">✧</span><div><strong>Luxury lovers</strong><small>Pay more for quality</small></div></div></div>
         <section class="activity-section"><div class="panel-heading"><h3>Shopper chatter</h3><span id="activityCount" class="subtle">0 VISITS</span></div><div class="activity-feed" id="activityFeed"><div class="feed-placeholder"><span>❀</span><p>Open your stall to see what people think of your designs.</p></div></div></section>
         <section class="memory-section"><div class="panel-heading"><h3>Town memory</h3><span class="subtle" id="memoryCount">0 KNOW YOU</span></div><div id="townMemory"></div></section>
-        <section class="collection-section"><div class="panel-heading"><h3>Your design shelf</h3><span class="subtle" id="shelfCount">0 DESIGNS</span></div><div id="designShelf"><p class="empty-shelf">Each batch you make becomes a design card with its own sales record.</p></div><div class="sim-flag shelf-disclosure">OFF-CHAIN DESIGN CARDS · NOT MINTED NFTS</div></section>
+        <section class="collection-section"><div class="panel-heading"><h3>Your design shelf</h3><span class="subtle" id="shelfCount">0 DESIGNS</span></div><div id="designShelf"><p class="empty-shelf">Each batch you make becomes a design card with its own sales record.</p></div></section>
       </aside>
     </main>
     <footer class="footer"><span>FORGEVILLE © THE WORKSHOP EXPERIMENT</span></footer>
   </div>
   <div id="modalRoot" class="modal-layer hidden" aria-hidden="true"></div>
+  <script type="module" src="vendor/model-viewer.min.js"></script>
+  <script src="lux3d.js"></script>
   <script>
 /* Forgeville — self-contained game economy. All currencies, shoppers and designs are
- * simulated. No blockchain connection, minting or token launch is performed. */
+ * simulated in the browser. Products are 3D models generated with Aholo Lux3D (see lux3d.js). */
 'use strict';
 
 const TEMPLATES = [
@@ -453,7 +457,7 @@ function scorePurchase(d,buyer,sat=saturation(d)){const fit=trendFit(d);const q=
  if(buyer.type==='luxury'){yesReason=q>=.75?'Love the quality. I’ll take it.':'This has character!';noReason=q<.72?'I wanted a finer finish.':'I’ll think about it.';if(q<.72)code='quality';}
  return {probability:chance,yesReason,noReason,code};
 }
-function makeProductSvg(d=run.design,opts={}){const hex=color(d.color).hex;const dark=mixColor(hex,'#304536',.24);const shine=mixColor(hex,'#ffffff',.22);let body='';
+function makeProductSvg(d=run.design,opts={}){const shot=typeof lux3dShot==='function'&&lux3dShot(d);if(shot)return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" role="img" aria-label="${htmlEscape(color(d.color).name)} ${htmlEscape(material(d.material).name)} ${htmlEscape(template(d.template).name)}, Aholo Lux3D model"><ellipse cx="260" cy="290" rx="120" ry="14" fill="#527459" opacity=".14"/><image href="${shot}" x="100" y="0" width="320" height="320" preserveAspectRatio="xMidYMid meet"/></svg>`;const hex=color(d.color).hex;const dark=mixColor(hex,'#304536',.24);const shine=mixColor(hex,'#ffffff',.22);let body='';
  if(d.template==='jacket')body=`<ellipse cx="260" cy="284" rx="112" ry="16" fill="#527459" opacity=".16"/><path d="M192 72L154 97 108 218 156 236 182 167 180 276 341 276 339 167 366 236 414 218 366 97 327 72 300 86 260 100 218 84Z" fill="${hex}" stroke="${dark}" stroke-width="5" stroke-linejoin="round"/><path d="M192 72Q214 58 260 100Q304 59 327 72L304 126 260 99 214 126Z" fill="${shine}" stroke="${dark}" stroke-width="3"/><path d="M260 100V274" stroke="${dark}" stroke-width="5" stroke-dasharray="6 4"/><path d="M188 192H226V225H188ZM296 192H334V225H296Z" fill="none" stroke="${dark}" stroke-width="4"/><path d="M178 270H342M118 217L155 230M369 231L405 218" stroke="${dark}" stroke-width="7"/><path d="M205 75L221 88M313 75L298 88" stroke="#fff" stroke-width="3" opacity=".65"/>`;
  if(d.template==='tote')body=`<ellipse cx="260" cy="287" rx="114" ry="15" fill="#527459" opacity=".16"/><path d="M164 114Q165 105 177 105H343Q354 105 356 118L366 263Q366 279 348 279H173Q156 278 157 262Z" fill="${hex}" stroke="${dark}" stroke-width="5"/><path d="M206 112V81Q207 40 260 40Q313 40 313 81V112" fill="none" stroke="${dark}" stroke-width="13"/><path d="M207 112V81Q210 51 260 51Q309 51 312 81V112" fill="none" stroke="${shine}" stroke-width="7"/><path d="M180 136H338M180 261H343" stroke="${dark}" opacity=".45" stroke-width="3"/><path d="M226 171h68v53h-68z" fill="${shine}" opacity=".67" rx="8"/><circle cx="260" cy="195" r="14" fill="none" stroke="${dark}" stroke-width="3"/><path d="M249 196l9 9 17-20" stroke="${dark}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
  if(d.template==='sneakers')body=`<ellipse cx="262" cy="279" rx="151" ry="14" fill="#527459" opacity=".14"/><path d="M112 175Q140 165 165 180L206 219 268 231 294 263Q289 276 261 278H103Q74 268 88 242L100 197Z" fill="${shine}" stroke="${dark}" stroke-width="5"/><path d="M251 136Q270 135 300 154L328 190Q349 213 393 229Q433 244 439 263Q438 275 414 275H240Q213 263 227 237L244 160Z" fill="${hex}" stroke="${dark}" stroke-width="5"/><path d="M88 254Q162 271 292 259L293 268Q288 277 260 278H107Q76 274 88 254M229 256Q331 273 439 255L439 266Q434 276 411 276H239Q223 275 229 256" fill="#f9f3de" stroke="${dark}" stroke-width="3"/><path d="M267 162L306 172M259 178L320 187M253 193L333 206M117 197L154 206M109 210L168 223" stroke="#f7efdc" stroke-width="7" stroke-linecap="round"/><path d="M355 235Q385 219 416 244" fill="none" stroke="${dark}" stroke-width="5" opacity=".5"/>`;
@@ -506,7 +510,7 @@ function renderRivals(){const t=TRENDS[run.round];const d=run.design;
   return `<div class="rival-item ${same?'overlap':''}"><span class="rival-thumb">${makeProductSvg(r,{badge:false})}</span><div class="rival-copy"><strong>${r.avatar} ${htmlEscape(r.shop)}</strong><small>${htmlEscape(material(r.material).name)} · ${htmlEscape(color(r.color).name)} ${htmlEscape(template(r.template).name.toLowerCase())}</small>${clash}</div><span class="rival-chip">◈ ${r.price}</span></div>`;}).join('');
  const s=saturation();setText('saturationNote',s>=.18?'Competition warning: your product looks very similar to a rival’s.':s>0?'A rival is making the same type of product. Price carefully.':'Your design stands apart from both rival workshops.');}
 function renderControls(){const d=run.design;setText('designSerial',`FV–${String(run.history.length+1).padStart(3,'0')}`);$('templateRow').innerHTML=TEMPLATES.map(t=>`<button class="template-button ${d.template===t.id?'selected':''}" type="button" data-template="${t.id}" aria-pressed="${d.template===t.id}"><span>${t.symbol}</span><span>${htmlEscape(t.name)}</span></button>`).join('');$('materialGrid').innerHTML=MATERIALS.map(m=>`<button class="material-button ${d.material===m.id?'selected':''}" type="button" data-material="${m.id}" aria-pressed="${d.material===m.id}"><span class="material-name"><strong>${htmlEscape(m.name)}</strong><small>${htmlEscape(m.subtitle)}</small></span><span class="material-cost">+${matCost(m)}</span></button>`).join('');$('colorRow').innerHTML=COLORS.map(c=>`<button class="color-pick ${d.color===c.id?'selected':''}" type="button" data-color="${c.id}" style="background:${c.hex}" title="${htmlEscape(c.name)}" aria-label="${htmlEscape(c.name)}" aria-pressed="${d.color===c.id}"></button>`).join('');$('remixButtons').innerHTML=`<button type="button" class="remix-button ${d.remix===null?'selected':''}" data-remix="original"><strong>✎ My own design</strong><small>No royalties</small></button>`+currentRivals().map((r,i)=>`<button type="button" class="remix-button ${d.remix===i?'selected':''}" data-remix="${i}"><strong>↗ ${htmlEscape(r.shop)}</strong><small>Copy their look · 7%</small></button>`).join('');$('priceRange').value=d.price;$('quantityInput').value=d.qty;renderPreview();renderCosts();}
-function renderPreview(){const d=run.design;const badge=quality(d)>.9?'● PREMIUM':quality(d)>.75?'● WELL-MADE':'● EVERYDAY';$('productIllustration').innerHTML=makeProductSvg(d);setText('previewProductName',template(d.template).title);setText('qualityTag',`${badge} · ${material(d.material).name.toUpperCase()}`);renderTrendCheck();renderStalls();}
+function renderPreview(){const d=run.design;const badge=quality(d)>.9?'● PREMIUM':quality(d)>.75?'● WELL-MADE':'● EVERYDAY';if(!(typeof lux3dPreview==='function'&&lux3dPreview(d)))$('productIllustration').innerHTML=makeProductSvg(d);setText('previewProductName',template(d.template).title);setText('qualityTag',`${badge} · ${material(d.material).name.toUpperCase()}`);renderTrendCheck();renderStalls();}
 // When you can't afford even one item, you can still open the stall to sell leftover stock.
 function cheapestUnit(){return Math.min(...TEMPLATES.flatMap(t=>MATERIALS.map(m=>t.base+matCost(m))));}
 function leftoverMode(){return run.mode==='design'&&run.cash<cheapestUnit();}
@@ -755,7 +759,7 @@ function movesPanel(report){const m=report.moves;const rows=[];
  if(report.copySales)rows.push(`<li><b>📋 Copycat royalties</b> Your copied design sold ${report.copySales} times across the street, earning you ◈ ${money(report.royaltiesIn)}.</li>`);
  if(report.copiedBy)rows.push(`<li><b>📋 You’ve been copied!</b> ${htmlEscape(report.copiedBy.shop)} will sell your design next round at ◈ ${report.copiedBy.price}. You earn 7% of every copy, but making the same thing again means competing with your own copy.</li>`);
  if(report.fightBack)rows.push(`<li><b>📉 Rivals fight back</b> You out-sold ${htmlEscape(report.fightBack.join(' and '))}. Next round they’ll undercut your prices and draw extra regulars.</li>`);
- if(report.buyback)rows.push(`<li><b>🔥 Buyback &amp; burn</b> The town treasury bought back ${fmtTok(report.buyback.tokens)} $FORGE with ◈ ${money(report.buyback.coins)} and burned it${report.hypeBurn?`, plus ${fmtTok(report.hypeBurn)} burned from your hype`:''}. Price ${report.tokenMove.after>=report.tokenMove.before?'▲':'▼'} ${Math.abs((report.tokenMove.after/report.tokenMove.before-1)*100).toFixed(1)}%.</li>`);
+ if(false&&report.buyback)rows.push(`<li><b>🔥 Buyback &amp; burn</b> The town treasury bought back ${fmtTok(report.buyback.tokens)} $FORGE with ◈ ${money(report.buyback.coins)} and burned it${report.hypeBurn?`, plus ${fmtTok(report.hypeBurn)} burned from your hype`:''}. Price ${report.tokenMove.after>=report.tokenMove.before?'▲':'▼'} ${Math.abs((report.tokenMove.after/report.tokenMove.before-1)*100).toFixed(1)}%.</li>`);
  return `<div class="moves-panel"><h4>Your moves, regulars &amp; rivals</h4><ul>${rows.join('')}</ul></div>`;}
 function currentRivals(round=run.round){const base=TRENDS[round].rivals;const o=run.rivalCopies&&run.rivalCopies[round];const tac=run.rivalTactics&&run.rivalTactics[round];
  return base.map((r,i)=>{let x=o&&o[i]?{...r,...o[i]}:r;if(tac&&tac[i])x={...x,price:Math.max(15,Math.round(x.price*tac[i].priceMult)),undercut:true,boost:tac[i].boost};return x;});}
@@ -812,7 +816,7 @@ const GUIDE_STEPS=[
   visual:()=>`<div class="guide-memory"><div class="guide-npc-wrap fan">${npcMarkup('luxury','#e5c3a7','long','#5a3a26','happy')}<span>“I loved the storm blue jacket I got here!”</span></div><div class="guide-copy"><span class="copy-tag">COPY</span> Wren &amp; Co. sells your design · <b>+7% to you</b></div></div>`},
  {kicker:'STEP 6 · FIVE ROUNDS',title:'Win the season.',
   body:'Five market days. Between rounds, spend profit on workshop upgrades. Rivals you out-sell will fight back with lower prices. Earn up to 3 stars: top the standings, reach ◈ 2,000 workshop value and win 12 loyal fans.',
-  visual:()=>`<div class="guide-standings"><div class="you"><span>1</span>Your workshop<b>◈ 2,239</b></div><div><span>2</span>Pip Studio<b>◈ 1,620</b></div><div><span>3</span>Wren &amp; Co.<b>◈ 1,401</b></div></div><p class="guide-fineprint">Coins, design cards, royalties, the treasury and $FORGE are simulated in your browser. No real tokens, NFTs or wallets.</p>`},
+  visual:()=>`<div class="guide-standings"><div class="you"><span>1</span>Your workshop<b>◈ 2,239</b></div><div><span>2</span>Pip Studio<b>◈ 1,620</b></div><div><span>3</span>Wren &amp; Co.<b>◈ 1,401</b></div></div><p class="guide-fineprint">Coins, shoppers, rivals and the town treasury are all simulated in your browser.</p>`},
 ];
 let guideStep=0;
 function renderGuide(){const s=GUIDE_STEPS[guideStep];const last=guideStep===GUIDE_STEPS.length-1;const root=$('modalRoot');
