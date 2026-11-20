@@ -133,6 +133,46 @@ async function fillStall(key, d, count) {
   }
 }
 
+
+/* Product renders for the rival cards and other small pictures. Drawn with this
+ * file's own three.js renderer, off screen, so they never touch the workbench
+ * viewer. Fills LUX3D.shots[template|colour] with PNG data URLs. */
+async function renderShots() {
+  if (typeof LUX3D === 'undefined' || typeof COLORS === 'undefined') return;
+  const W = 360, H = 360;
+  const r = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+  r.setSize(W, H, false); r.setPixelRatio(1);
+  r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.05;
+  const sc = new THREE.Scene();
+  sc.add(new THREE.HemisphereLight('#ffffff', '#c9b893', 1.9));
+  const key = new THREE.DirectionalLight('#ffffff', 2.0); key.position.set(3, 5, 4); sc.add(key);
+  const fill = new THREE.DirectionalLight('#ffffff', 0.7); fill.position.set(-4, 2, -3); sc.add(fill);
+  const cam = new THREE.PerspectiveCamera(30, 1, 0.01, 100);
+  for (const t of Object.keys(MODELS)) {
+    let src; try { src = await loadModel(t); } catch (e) { continue; }
+    const m = src.clone(true);
+    const mats = [];
+    m.traverse(o => { if (o.isMesh) { o.material = o.material.clone(); mats.push(o.material); } });
+    const box = new THREE.Box3().setFromObject(m); const size = box.getSize(new THREE.Vector3()); const c = box.getCenter(new THREE.Vector3());
+    m.position.sub(c); sc.add(m);
+    const rad = size.length() / 2;
+    const theta = THREE.MathUtils.degToRad(t === 'cap' ? 215 : 28), phi = THREE.MathUtils.degToRad(72);
+    const dist = rad / Math.sin(THREE.MathUtils.degToRad(cam.fov / 2)) * 1.02;
+    cam.position.set(dist * Math.sin(phi) * Math.sin(theta), dist * Math.cos(phi), dist * Math.sin(phi) * Math.cos(theta));
+    cam.lookAt(0, 0, 0);
+    for (const col of COLORS) {
+      for (const mt of mats) { mt.color = new THREE.Color(col.hex); mt.roughness = 0.8; mt.metalness = 0; }
+      r.render(sc, cam);
+      LUX3D.shots[`${t}|${col.id}`] = r.domElement.toDataURL('image/png');
+      await new Promise(res => setTimeout(res, 0));
+    }
+    sc.remove(m);
+  }
+  r.dispose();
+  LUX3D.shotsDone = true;
+  try { renderStalls(); renderRivals(); renderPreview(); } catch (e) {}
+}
+
 function designs() {
   let rivals = [];
   try { rivals = currentRivals(); } catch (e) {}
@@ -190,6 +230,7 @@ function init() {
   window.Market3D = { show, refresh };
   // The town square is the 3D market
   try { show(true); } catch (e) { console.warn('3D market unavailable', e); }
+  renderShots();
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

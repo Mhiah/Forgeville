@@ -15,7 +15,8 @@ const LUX3D = {
   },
   // Camera angle per model, so each product faces the player
   orbit: { cap: '215deg 70deg auto' },
-  available: {},
+  // All four Lux3D models ship with the game, so the 3D viewer is used from the first frame
+  available: { jacket: true, tote: true, sneakers: true, cap: true },
   shots: {},
   shotsDone: false,
 };
@@ -96,45 +97,9 @@ function lux3dShot(d) {
   return LUX3D.shots[`${d.template}|${d.color}`] || null;
 }
 
-const lux3dFrame = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
-async function lux3dRenderShots() {
-  if (typeof COLORS === 'undefined') return;
-  const templates = Object.keys(LUX3D.available).filter(t => LUX3D.available[t]);
-  if (!templates.length) return;
-  await customElements.whenDefined('model-viewer');
-  const mv = lux3dMakeViewer({ 'camera-orbit': '28deg 70deg auto' });
-  mv.style.cssText = 'position:fixed;left:0;top:0;width:360px;height:360px;opacity:0;pointer-events:none;z-index:-1;background:transparent';
-  document.body.appendChild(mv);
-  for (const t of templates) {
-    await new Promise(res => {
-      const done = () => { mv.removeEventListener('load', done); res(); };
-      mv.addEventListener('load', done);
-      mv.setAttribute('camera-orbit', LUX3D.orbit[t] || '28deg 70deg auto');
-      mv.setAttribute('src', LUX3D.models[t]);
-      setTimeout(done, 15000);
-    });
-    for (const c of COLORS) {
-      lux3dApplyLook(mv, { color: c.id });
-      await lux3dFrame();
-      try { LUX3D.shots[`${t}|${c.id}`] = mv.toDataURL('image/png'); } catch (e) {}
-    }
-    if (typeof renderStalls === 'function') { try { renderStalls(); renderRivals(); } catch (e) {} }
-  }
-  mv.remove();
-  LUX3D.shotsDone = true;
-  try { renderAll(); } catch (e) {}
-}
-
 async function lux3dInit() {
-  await Promise.all(Object.entries(LUX3D.models).map(async ([t, url]) => {
-    try {
-      const r = await fetch(url, { method: 'HEAD', cache: 'no-store' });
-      LUX3D.available[t] = r.ok;
-    } catch (e) { LUX3D.available[t] = false; }
-  }));
   try { renderPreview(); } catch (e) {}
-  lux3dRenderShots();
+  // Stall and card renders are made by market3d.js with its own renderer
 }
 
 window.addEventListener('DOMContentLoaded', lux3dInit);
